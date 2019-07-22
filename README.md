@@ -1,2 +1,2 @@
 # ArbitrationParty
-miniprogram，project management
+wechat subscription，project management
