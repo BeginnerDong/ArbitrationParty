@@ -1,0 +1,135 @@
+ *{margin: 0; padding: 0;}
+.container{
+	width:100%;
+	height:100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	overflow:hidden;
+	overflow-y:auto;
+}
+.name-container{
+  display:flex;
+  white-space:nowrap;
+  width:100%;
+  height:55px;
+  padding:0 5%;
+  border-bottom:1px solid #F1F1F1;
+  align-items:center;
+}
+.name-container .title{
+	width:10%;
+	height:26px;
+	font-size:13px;
+	color:rgb(34,34,34);
+	display:flex;
+	align-items:center;
+}
+.name-container input{
+   width:78%;
+   height:26px;
+   padding-left:10%;
+}
+.name-container .style-container{
+   width:78%;
+   height:26px;
+   padding-left:18%;
+   display:flex;
+   white-space:nowrap;
+   align-items:center;
+}
+.style-little-container{
+	width:25%;
+	height:26px;
+	display:flex;
+	align-items:center;
+}
+.style-container image{
+	width:10px;
+	height:11px;
+	margin-right:5px;
+	display:inline-block;
+}
+.style-container text{
+	font-size:13px;
+	color:rgb(34,34,34);
+}
+/************增加内容************/
+.tip-container{
+	display:flex;
+	white-space:nowrap;
+	width:100%;
+	height:115px;
+	padding:5%;
+	border-bottom:1px solid #F1F1F1;
+}
+.tip-container .title{
+	width:22%;
+	height:55px;
+	font-size:13px;
+	color:rgb(34,34,34);
+}
+.tip-container textarea{
+	width:60%;
+	height:90px;
+	padding:4%;
+	background-color:rgb(243,243,243);	
+}
+/************增加内容************/
+
+/************上传图片************/
+.img-container{
+	display:flex;
+	white-space:nowrap;
+	width:100%;
+	height:120px;
+	padding:5%;
+	border-bottom:1px solid #F1F1F1;
+	position:relative;
+	}
+	.img-container .title{
+		width:20%;
+		height:55px;
+		font-size:13px;
+		color:rgb(34,34,34);
+	}
+	.img-container input{
+		width:20%;
+		height:90px;
+		padding:4%;
+		background-color:rgb(243,243,243);
+	}
+	.img-container image{
+		width:8%;
+		height:32px;
+		position:absolute;
+		left:31%;
+		top:40%;
+	}
+	.text-container{
+		width:10%;
+		height:55px;
+		font-size:11px;
+		padding:5% 5% 10% 5%;
+		color:rgb(153,153,153);
+	}
+	.img-container p{
+		width:10%;
+		height:20px;
+		}	
+/************上传图片************/
+.submit{
+	width:100%;
+	margin:100px 0 50px 0 ;
+	text-align:center;
+}
+.submit button{
+	width:70%;
+	height:35px;
+	margin:0 auto;
+	color:#ffffff;
+	background-color:rgb(3,150,255);
+	font-size:12px;
+}
+
+

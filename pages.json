@@ -1,0 +1,128 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "注册", //设置页面标题文字
+				"onReachBottomDistance": 100
+			}
+		},
+		{
+			"path": "pages/form/form",
+			"style": {
+				"navigationBarTitleText": "提交表单", //设置页面标题文字
+				"onReachBottomDistance": 100
+			}
+		},
+		{
+			"path": "pages/myCenter/myCenter",
+			"style": {
+				"navigationBarTitleText": "个人中心", //设置页面标题文字
+				"onReachBottomDistance": 100
+			}
+		},
+		{
+			"path": "pages/attPro/attPro",
+			"style": {
+				"navigationBarTitleText": "参与项目", //设置页面标题文字
+				"onReachBottomDistance": 100
+			}
+		},
+		{
+			"path": "pages/proPartake/proPartake",
+			"style": {
+				"navigationBarTitleText": "项目参与中", //设置页面标题文字
+				"onReachBottomDistance": 100
+			}
+		},
+		{
+			"path": "pages/proDetails/proDetails",
+			"style": {
+				"navigationBarTitleText": "项目详情", //设置页面标题文字
+				"onReachBottomDistance": 100
+			}
+		},
+		{
+			"path": "pages/proDetailFinish/proDetailFinish",
+			"style": {
+				"navigationBarTitleText": "完成项目详情", //设置页面标题文字
+				"onReachBottomDistance": 100
+			}
+		},
+		{
+			"path": "pages/applyArbitral/applyArbitral",
+			"style": {
+				"navigationBarTitleText": "申请仲裁", //设置页面标题文字
+				"onReachBottomDistance": 100
+			}
+		},
+		{
+			"path": "pages/applyArbUpPic/applyArbUpPic",
+			"style": {
+				"navigationBarTitleText": "申请仲裁", //设置页面标题文字
+				"onReachBottomDistance": 100
+			}
+		},
+		{
+			"path": "pages/myArbitralDetail/myArbitralDetail",
+			"style": {
+				"navigationBarTitleText": "仲裁项目详情", //设置页面标题文字
+				"onReachBottomDistance": 100
+			}
+		},
+		{
+			"path": "pages/voucher/voucher",
+			"style": {
+				"navigationBarTitleText": "上传凭证", //设置页面标题文字
+				"onReachBottomDistance": 100
+			}
+		},
+		{
+			"path": "pages/applyPay/applyPay",
+			"style": {
+				"navigationBarTitleText": "申请付款", //设置页面标题文字
+				"onReachBottomDistance": 100
+			}
+		},
+		{
+			"path": "pages/addDynamic/addDynamic",
+			"style": {
+				"navigationBarTitleText": "添加动态", //设置页面标题文字
+				"onReachBottomDistance": 100
+			}
+		},
+		{
+			"path": "pages/myArbitral/myArbitral",
+			"style": {
+				"navigationBarTitleText": "我的仲裁", //设置页面标题文字
+				"onReachBottomDistance": 100
+			}
+		},
+		{
+			"path": "pages/myTrading/myTrading",
+			"style": {
+				"navigationBarTitleText": "交易流水", //设置页面标题文字
+				"onReachBottomDistance": 100
+			}
+		},
+		{
+			"path": "pages/myCtfcation/myCtfcation",
+			"style": {
+				"navigationBarTitleText": "实名认证", //设置页面标题文字
+				"onReachBottomDistance": 100
+			}
+		},
+		{
+			"path": "pages/myCredit/myCredit",
+			"style": {
+				"navigationBarTitleText": "信誉分", //设置页面标题文字
+				"onReachBottomDistance": 100
+			}
+		}
+		
+	]
+// 	"globalStyle": {
+// 		"navigationStyle": "custom"
+// 
+// 	}
+}
