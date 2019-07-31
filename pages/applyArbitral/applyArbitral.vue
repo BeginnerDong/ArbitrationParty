@@ -12,7 +12,6 @@
 				<image src="../../static/images/apply-icon4.png"/>
 				<view>全民仲裁</view>
 			</view>
-			
 		</view>
 		
 		<view class="button" @click="webSelf.$Router.navigateTo({route:{path:'/pages/applyArbUpPic/applyArbUpPic'}})"><button>下一步</button></view>
