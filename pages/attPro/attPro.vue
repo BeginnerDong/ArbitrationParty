@@ -111,6 +111,9 @@
        			<view class="title">我的角色：</view>
        			<view class="name">甲方</view>
        		</view>
+			<view>
+				<image class="fxdIcon" src="../../static/images/canyu-icon2.png" mode=""></image>
+			</view>
        	</view>
        	<!-- first -->
        	
@@ -134,6 +137,9 @@
        			<view class="title">我的角色：</view>
        			<view class="name">乙方</view>
        		</view>
+			<view>
+				<image class="fxdIcon" src="../../static/images/canyu-icon1.png" mode=""></image>
+			</view>
        	</view>
        	<!-- first -->
        	
@@ -157,6 +163,9 @@
        			<view class="title">我的角色：</view>
        			<view class="name">甲方</view>
        		</view>
+			<view>
+				<image class="fxdIcon" src="../../static/images/canyu-icon1.png" mode=""></image>
+			</view>
        	</view>
        	<!-- first -->
        </view>
@@ -185,9 +194,7 @@
 			document.title = '参与项目'			
 		},
 
-
 		methods: {
-
 			isShow() {
 				const self = this;
 				

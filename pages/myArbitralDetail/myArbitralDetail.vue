@@ -5,7 +5,7 @@
 				<view class="text">详情</view>
 			</view>
 			<view @click="num=1" :class="{'active-item':num===1}" class="item">
-				<view class="text">动态</view>
+				<view class="text">证据</view>
 			</view>
 		</view>
 		<view class="tab-con">
@@ -36,7 +36,6 @@
 							<view class="score"><text>信用分:</text>100</view>
 							<view><text>已完结交易单数:</text>5</view>
 						</view>
-
 					</view>
 
 					<view class="sum-container">
@@ -53,97 +52,52 @@
 						<view class="title">增加内容</view>
 						<textarea type="text" placeholder="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
 						 placeholder-style="color:#999999;font-size:13px;" />
-						</view>
+					</view>
 	   	
-	   	<view class="img-container">
-	   	  <view class="title">附件</view>
-		  <view class="img-little-container">
-	   	    <image src="../../static/images/img.png"/>
-		    <image src="../../static/images/img.png"/>
-		    <image src="../../static/images/img.png"/>
-		    <image src="../../static/images/img.png"/>
-		    <image src="../../static/images/img.png"/>
-		  </view>
-	   	</view>
+					<view class="img-container">
+						<view class="title">附件</view>
+						<view class="img-little-container">
+							<image src="../../static/images/img.png"/>
+							<image src="../../static/images/img.png"/>
+							<image src="../../static/images/img.png"/>
+							<image src="../../static/images/img.png"/>
+							<image src="../../static/images/img.png"/>
+						</view>
+					</view>
 		
-		<view class="flat-info">
-			<view class="phone-big-container">
-
-				<view class="phone-container">
-					<view class="title" style="color:#000000;font-size:15px;font-weight:bold;">平台信息</view>
+					<view class="flat-info">
+						<view class="phone-big-container">
+							<view class="phone-container">
+								<view class="title" style="color:#000000;font-size:15px;font-weight:bold;">平台信息</view>
+							</view>
+							<view class="info-container">
+								<view>付款账号</view>
+								<input type="text" disabled="true" placeholder="123356968963332" placeholder-style="color:#000;font-size:13px;" />
+							</view>
+						</view>
+						
+						<view class="phone-container" style="border-bottom:1px solid #F1F1F1;">
+							<view class="title">姓名</view>
+							<input type="text" disabled="true" placeholder="张三" placeholder-style="color:rgb(34,34,34);font-size:13px;" />
+						</view>
+					</view>
 				</view>
-				<view class="info-container">
-					<view>付款账号</view>
-					<input type="text" disabled="true" placeholder="123356968963332" placeholder-style="color:#000;font-size:13px;" />
-				</view>
-			
-			</view>
-			
-			<view class="phone-container" style="border-bottom:1px solid #F1F1F1;">
-				<view class="title">姓名</view>
-				<input type="text" disabled="true" placeholder="张三" placeholder-style="color:rgb(34,34,34);font-size:13px;" />
 			</view>
 		</view>
-
-		   
-	   </view>
-	   </view>
-	  
-	   <!-- 弹窗 -->
-	   <view id="modal-bg" v-if="isShow"></view>
-	   <view id="modal" v-if="isShow">
-	   	<view class="title">平台说明</view>
-	   	<image src="../../static/images/form-img1.png" class="code"/>
-	   	<image src="../../static/images/about-icon8.png" id="close" @click="show()"/>
-	   </view>
-	   <!-- 弹窗 -->
-	   
-	</view>
 	<view v-show="num===1">
 	   <!--项目动态 -->
 	     <view class="dynamic-big-container">
 			 
-			 <view class="dynamic-container">
+			<view class="dynamic-container" v-for="(item,index) in dynami" :key="index"> 
 				 <view class="date-container">
-					 <view class="jia">甲方</view>
-					 <view class="date">2019.05.23</view>
+					 <!-- 乙方名字颜色 style="color:rgb(38,199,72);" -->
+					 <view class="jia">{{item.nameA}}</view>
+					 <view class="date">{{item.time}}</view>
 				 </view>
-				 <view class="content">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-				 内容内容内容</view>
-				 <image src="../../static/images/dynamic-img.png"/>
-			 </view>
-			 
-			 
-			 <view class="dynamic-container">
-				 <view class="date-container">
-					 <view class="jia" style="color:rgb(38,199,72);">乙方</view>
-					 <view class="date">2019.05.23</view>
-				 </view>
-				 <view class="content">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-				 内容内容内容</view>
-				 <image src="../../static/images/dynamic-img.png"/>
-			 </view>
-			 
-			 <view class="dynamic-container">
-				 <view class="date-container">
-					 <view class="jia">甲方</view>
-					 <view class="date">2019.05.23</view>
-				 </view>
-				 <view class="content">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-				 内容内容内容</view>
-				 <image src="../../static/images/dynamic-img.png"/>
-			 </view>
-			 
-			 <view class="dynamic-container">
-				 <view class="date-container">
-					 <view class="jia" style="color:rgb(38,199,72);">乙方</view>
-					 <view class="date">2019.05.23</view>
-				 </view>
-				 <view class="content">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</view>
-				 <image src="../../static/images/dynamic-img.png"/>
+				 <view class="content">{{item.cont}}</view>
+				 <image :src="item.urlPic"/>
 			</view>
-			 
-				<view class="button" @click="webSelf.$Router.navigateTo({route:{path:'/pages/addDynamic/addDynamic'}})"><button>添加动态</button></view>
+			<view class="button" @click="webSelf.$Router.navigateTo({route:{path:'/pages/addDynamic/addDynamic'}})"><button>添加动态</button></view>
 		 </view>
 	   <!--项目动态 -->
 	</view>
@@ -181,7 +135,33 @@
 				whether:false,
                 num:0,
 				isShow:false,
-				showView: false
+				showView: false,
+				dynami:[
+					{
+						nameA:"甲方",
+						time:"2019.07.30",
+						cont:"内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容",
+						urlPic:"../../static/images/dynamic-img.png"
+					},
+					{
+						nameA:"乙方",
+						time:"2019.07.30",
+						cont:"内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容",
+						urlPic:"../../static/images/dynamic-img.png"
+					},
+					{
+						nameA:"乙方",
+						time:"2019.07.30",
+						cont:"内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容",
+						urlPic:"../../static/images/dynamic-img.png"
+					},
+					{
+						nameA:"乙方",
+						time:"2019.07.30",
+						cont:"内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容",
+						urlPic:"../../static/images/dynamic-img.png"
+					}
+				]
 			}
 		},
 

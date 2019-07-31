@@ -110,42 +110,16 @@
 	   <!--项目动态 -->
 	     <view class="dynamic-big-container">
 			 
-			 <view class="dynamic-container">
+			 <view class="dynamic-container" v-for="(item,index) in dynami" :key="index">
 				 <view class="date-container">
-					 <view class="jia">甲方</view>
-					 <view class="date">2019.05.23</view>
+					<!-- 乙方的名子颜色 style="color:rgb(38,199,72);" -->
+					 <view class="jia">{{item.nameA}}</view>
+					 <view class="date">{{item.time}}</view>
 				 </view>
-				 <view class="content">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</view>
-				 <image src="../../static/images/dynamic-img.png"/>
+				 <view class="content">{{item.cont}}</view>
+				 <image :src="item.urlPic"/>
 			 </view>
 			 
-			 
-			 <view class="dynamic-container">
-			 				 <view class="date-container">
-			 					 <view class="jia" style="color:rgb(38,199,72);">乙方</view>
-			 					 <view class="date">2019.05.23</view>
-			 				 </view>
-			 				 <view class="content">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</view>
-			 				 <image src="../../static/images/dynamic-img.png"/>
-			 </view>
-			 
-			 <view class="dynamic-container">
-			 				 <view class="date-container">
-			 					 <view class="jia">甲方</view>
-			 					 <view class="date">2019.05.23</view>
-			 				 </view>
-			 				 <view class="content">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</view>
-			 				 <image src="../../static/images/dynamic-img.png"/>
-			 </view>
-			 
-			 <view class="dynamic-container">
-			 				 <view class="date-container">
-			 					 <view class="jia" style="color:rgb(38,199,72);">乙方</view>
-			 					 <view class="date">2019.05.23</view>
-			 				 </view>
-			 				 <view class="content">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</view>
-			 				 <image src="../../static/images/dynamic-img.png"/>
-			 </view>
 			 
 			  <view class="button" @click="webSelf.$Router.navigateTo({route:{path:'/pages/addDynamic/addDynamic'}})"><button>添加动态</button></view>
 		 </view>
@@ -163,7 +137,33 @@
 				webSelf: this,
 				whether:false,
                 num:0,
-				isShow:false
+				isShow:false,
+				dynami:[
+					{
+						nameA:"甲方",
+						time:"2019.07.30",
+						cont:"内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容",
+						urlPic:"../../static/images/dynamic-img.png"
+					},
+					{
+						nameA:"乙方",
+						time:"2019.07.30",
+						cont:"内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容",
+						urlPic:"../../static/images/dynamic-img.png"
+					},
+					{
+						nameA:"乙方",
+						time:"2019.07.30",
+						cont:"内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容",
+						urlPic:"../../static/images/dynamic-img.png"
+					},
+					{
+						nameA:"乙方",
+						time:"2019.07.30",
+						cont:"内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容",
+						urlPic:"../../static/images/dynamic-img.png"
+					}
+				]
 			}
 		},
 

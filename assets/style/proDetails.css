@@ -411,7 +411,7 @@ align-items:center;
 	height:100%;
 	position: absolute;
 	left: 0;
-	top: 0;
+	top: 108rpx;
 	overflow:hidden;
 	overflow-y:auto;
 	margin:0 auto;
@@ -436,6 +436,9 @@ align-items:center;
 	display:inline-block;
 	color:rgb(255,157,3);
 	font-size:15px;
+}
+.dynamic-container .jia.jiab{
+	color:rgb(38,199,72);
 }
 .dynamic-container .date{
 	color:#999999;

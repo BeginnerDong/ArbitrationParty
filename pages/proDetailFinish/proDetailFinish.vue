@@ -26,8 +26,6 @@
 						<input type="text" disabled="true" placeholder="乙方" placeholder-style="color:rgb(34,34,34);font-size:13px;" />
 					</view>
 
-
-
 					<view class="phone-big-container">
 						<view class="phone-container">
 							<view class="title">填写交易对方手机号</view>
@@ -91,62 +89,22 @@
 	   </view>
 	   </view>
 	  
-	   <!-- 弹窗 -->
-	   <view id="modal-bg" v-if="isShow"></view>
-	   <view id="modal" v-if="isShow">
-	   	<view class="title">平台说明</view>
-	   	<image src="../../static/images/form-img1.png" class="code"/>
-	   	<image src="../../static/images/about-icon8.png" id="close" @click="show()"/>
-	   </view>
-	   <!-- 弹窗 -->
 	   
 	</view>
 	<view v-show="num===1">
 	   <!--项目动态 -->
 	     <view class="dynamic-big-container">
 			 
-			 <view class="dynamic-container">
+			<view class="dynamic-container" v-for="(item,index) in dynami" :key="index"> 
 				 <view class="date-container">
-					 <view class="jia">甲方</view>
-					 <view class="date">2019.05.23</view>
+					 <!-- 乙方名字颜色 style="color:rgb(38,199,72);" -->
+					 <view class="jia">{{item.nameA}}</view>
+					 <view class="date">{{item.time}}</view>
 				 </view>
-				 <view class="content">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-				 内容内容内容</view>
-				 <image src="../../static/images/dynamic-img.png"/>
-			 </view>
-			 
-			 
-			 <view class="dynamic-container">
-			 				 <view class="date-container">
-			 					 <view class="jia" style="color:rgb(38,199,72);">乙方</view>
-			 					 <view class="date">2019.05.23</view>
-			 				 </view>
-			 				 <view class="content">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-			 				 内容内容内容</view>
-			 				 <image src="../../static/images/dynamic-img.png"/>
-			 </view>
-			 
-			 <view class="dynamic-container">
-			 				 <view class="date-container">
-			 					 <view class="jia">甲方</view>
-			 					 <view class="date">2019.05.23</view>
-			 				 </view>
-			 				 <view class="content">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-			 				 内容内容内容</view>
-			 				 <image src="../../static/images/dynamic-img.png"/>
-			 </view>
-			 
-			 <view class="dynamic-container">
-			 				 <view class="date-container">
-			 					 <view class="jia" style="color:rgb(38,199,72);">乙方</view>
-			 					 <view class="date">2019.05.23</view>
-			 				 </view>
-			 				 <view class="content">内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-			 				 内容内容内容</view>
-			 				 <image src="../../static/images/dynamic-img.png"/>
-			 </view>
-			 
-			  <view class="button" @click="webSelf.$Router.navigateTo({route:{path:'/pages/addDynamic/addDynamic'}})"><button>添加动态</button></view>
+				 <view class="content">{{item.cont}}</view>
+				 <image :src="item.urlPic"/>
+			</view>
+			<view class="button" @click="webSelf.$Router.navigateTo({route:{path:'/pages/addDynamic/addDynamic'}})"><button>添加动态</button></view>
 		 </view>
 	   <!--项目动态 -->
 	</view>
@@ -162,7 +120,32 @@
 				webSelf: this,
 				whether:false,
                 num:0,
-				isShow:false
+				dynami:[
+					{
+						nameA:"甲方",
+						time:"2019.07.30",
+						cont:"内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容",
+						urlPic:"../../static/images/dynamic-img.png"
+					},
+					{
+						nameA:"乙方",
+						time:"2019.07.30",
+						cont:"内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容",
+						urlPic:"../../static/images/dynamic-img.png"
+					},
+					{
+						nameA:"乙方",
+						time:"2019.07.30",
+						cont:"内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容",
+						urlPic:"../../static/images/dynamic-img.png"
+					},
+					{
+						nameA:"乙方",
+						time:"2019.07.30",
+						cont:"内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容",
+						urlPic:"../../static/images/dynamic-img.png"
+					}
+				]
 			}
 		},
 
@@ -183,7 +166,6 @@
 				
 				self.isShow = !self.isShow
 			},
-
 
 			menuChange(num) {
 				const self = this;
