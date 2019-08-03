@@ -75,7 +75,10 @@
 	   
 	<view class="img-container">
 	  <view class="title">附件</view>
-	  <input type="file"  id="custom-up" @change='upload' style='display: none !important;'>
+	  <!-- <input type="file"  id="custom-up" @change='upload' style='display: none !important;'> -->
+	  <view ref="input" class="input">  
+
+        </view> 
 	  <image @click="webSelf.$Utils.stopMultiClick(customButtonClick)" src="../../static/images/form-icon3.png"/>
 	  <view class="text-container">
 		  <view><p>可上传图片或者文件</p></view>
@@ -100,7 +103,12 @@
 		<image src="../../static/images/about-icon8.png" id="close" @click="show()"/>
 	</view>
 	<!-- 客服二维码弹窗 -->
-	
+	<div id='showinfo'></div>
+    <br />
+    <div id='progress' style='display:none;text-align:center;'>
+       <div id='bar' style='text-align:right;'></div>
+    </div>
+
 	
 	<!--底部tab键-->
 	<view class="navbar">
@@ -137,6 +145,16 @@
 				}
 			}
 		},
+		
+		mounted() {  
+            var input = document.createElement('input')  
+            input.type = 'file';
+            input.id = 'custom-up';  
+            input.onchange = (event) => {  
+                this.ajax_upload(event);
+            };
+            this.$refs.input.$el.appendChild(input);  
+        },
 	
 		onLoad(options) {
 			const self = this;
@@ -148,20 +166,24 @@
 			document.title = '提交表单'			
 		},
 		methods: {
+			
 				customButtonClick(){
-				  const self = this;
-				  console.log('996352',document.getElementById("custom-up"));
-				  document.getElementById("custom-up").click();
-				  
+					const self = this;
+					console.log('996352',document.getElementById("custom-up"));
+					var btn = document.getElementById('custom-up');
+					btn.click();
 				},
-				upload(){
+				
+				upload(e){
 					const self = this; 
-					let file = e.target.files[0]
-					console.log('file',file)
+					
+					let file = e.target.files[0];
+					var filePath = e.target.value;
+					console.log('file',e.target.value)
 							
 					uni.uploadFile({
 						url: 'http://loan.52team.top/api/public/index.php/api/v1/Base/FtpFile/upload', //仅为示例，非真实的接口地址
-						filePath: tempFilePaths[0],
+						filePath: filePath,
 						name: 'file',
 						formData: {
 							'token':uni.getStorageSync('user_token')
@@ -185,11 +207,63 @@
 						complete:function(){
 							uni.setStorageSync('canClick', true);
 						}
-					});
-							
-							
-						
+					});				
 				},
+				
+				
+				createXHR(){
+					var xhr=null;
+				   if(window.XMLHttpRequest)  //要是支持XMLHttpRequest的则采用XMLHttpRequest生成对象
+					  xhr=new XMLHttpRequest();
+				   else if(window.ActiveXobiect)//要是支持win的ActiveXobiect则采用ActiveXobiect生成对象。
+					 xhr=new ActiveXobiect('Microsoft.XMLHTTP');
+					return xhr;
+				 },
+				 ajax_upload(e){
+				   var xhr = this.createXHR();
+				   var formData=new FormData();
+				   var file = e.target.files[0];
+				   var info = '文件名:'+file.name+' 文件类型:'+file.type+' 文件大小:'+file.size;
+				   var showInfo=document.getElementById('showinfo');
+				   var bar=document.getElementById('bar');
+				   var progress=document.getElementById('progress');
+				   showInfo.innerHTML= info;
+				   formData.append('pic', file);
+				   var schedule = 0;
+					//xhr.upload.onprogress是回调函数，接收参数d是ProgressEvent对象，d.loaded表示已经上传的，d.total表示文件总大小。
+				   xhr.upload.οnprοgress=function(d){
+					   progress.style.display='block';
+					   schedule = d.loaded/d.total*100;
+					   schedule = schedule.toFixed(2);
+					   console.log(d);
+					   bar.style.width = schedule+'%';
+					   bar.innerHTML = schedule+'%';
+				   }
+				   xhr.open('POST', 'http://loan.52team.top/api/public/index.php/api/v1/Base/FtpFile/upload', true);
+				   xhr.send(formData);
+				   xhr.onreadystatechange = function(){
+					 if( this.readyState == 4 && this.status == 200){
+						showInfo.innerHTML = showInfo.innerHTML+'<br />'+this.responseText;
+						progress.style.display = 'none';
+					 }
+				   }
+				   document.getElementById('custom-up').value = '';
+				 },
+
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 		
 				show() {
 					const self = this;
