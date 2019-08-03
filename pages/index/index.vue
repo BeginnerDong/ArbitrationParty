@@ -5,21 +5,22 @@
 		<view class="register-container">
 			<view class="nickname-container">
 				<image src="../../static/images/login-icon2.png" />
-				<input type="text" placeholder="请输入姓名" placeholder-style="color:#999999;font-size:13px;" />
+				<input style="width:100%;" type="text" v-model="submitData.name" placeholder="请输入姓名" placeholder-style="color:#999999;font-size:13px;" />
 			</view>
 
 			<view class="nickname-container">
 				<image src="../../static/images/login-icon3.png" style="width:26rpx;height:40rpx;" />
-				<input type="text" placeholder="请输入手机号" placeholder-style="color:#999999;font-size:13px;" />
+				<input style="width:100%;" type="text" v-model="submitData.phone" placeholder="请输入手机号" placeholder-style="color:#999999;font-size:13px;" />
 			</view>
 
 			<view class="nickname-container">
 				<image src="../../static/images/login-icon4.png" />
-				<input type="text" placeholder="请输入验证码" placeholder-style="color:#999999;font-size:13px;" />
-				<button style="line-height:50rpx;">获取验证码</button>
+				<input style="width:100%;" type="text" v-model="submitData.code" placeholder="请输入验证码" placeholder-style="color:#999999;font-size:13px;" />
+				<button style="line-height:50rpx;" @click="!sendCode?webSelf.$Utils.stopMultiClick(getCode):''">{{sendCode?codeTimer+'s':'获取验证码'}}</button>
 			</view>
 
-			<view class="button" @click="webSelf.$Router.navigateTo({route:{path:'/pages/form/form'}})"><button>注册</button></view>
+			<view class="button" @click="webSelf.$Utils.stopMultiClick(login)"><button>{{subType}}</button></view>
+			<view  @click="change">{{subType=='登陆'?'注册':'登陆'}}</view>
 		</view>
 	</view>
 </template>
@@ -29,12 +30,19 @@
 		data() {
 			return {
 				webSelf: this,
-
+				submitData:{
+					phone:'',
+					login_name:'',
+					code:''	
+				},
+				sendCode:false,
+				codeTimer:0,
+				subType:'登陆'
 			}
 		},
 
 		onLoad(options) {
-
+			uni.setStorageSync('canClick', true);
 		},
 
 		onShow() {
@@ -44,6 +52,130 @@
 
 
 		methods: {
+			
+			change(){
+				const self = this;
+				if(self.subType=='登陆'){
+					self.subType = '注册'
+				}else{
+					self.subType = '登陆';
+				};
+			},
+			
+			getCode(){
+				const self = this;
+				
+				if(!self.submitData.phone){
+					uni.showToast({
+						title: '请输入手机号',
+						duration: 1000,
+						success:function(){
+							uni.setStorageSync('canClick', true);
+						}
+					});
+					return;
+				};
+				self.codeTimer = 0;
+				self.sendCode = true;
+				const postData = {
+					phone:self.submitData.phone
+				};
+				const callback = (res)=>{
+					if(res.solely_code==100000){
+						uni.showToast({
+							title: '发送成功',
+							duration: 1000,
+							success:function(){
+								var codeInterval = setInterval(function(){
+									self.codeTimer++;
+									console.log('self.codeTimer',self.codeTimer)
+									if(self.codeTimer>59){
+										self.sendCode = false;
+										clearInterval(codeInterval);
+									};
+								},1000);
+							}
+						});	
+					}else{
+						uni.showToast({
+							title: res.msg,
+							duration: 1000,
+							success:function(){
+								self.sendCode = false;
+							}
+						});
+						
+					};
+					uni.setStorageSync('canClick', true);
+				};
+				self.$apis.sendCode(postData, callback);
+			},
+			
+			login(){
+				const self = this;
+				if(!self.submitData.phone){
+					uni.showToast({
+						title: '请填写手机号',
+						duration: 1000
+					});
+					uni.setStorageSync('canClick', true);
+					return;
+				};
+				if(!self.submitData.name){
+					uni.showToast({
+						title: '请填写用户名',
+						duration: 1000
+					});
+					uni.setStorageSync('canClick', true);
+					return;
+				};
+				if(!self.submitData.code){
+					uni.showToast({
+						title: '请填写验证码',
+						duration: 1000
+					});
+					uni.setStorageSync('canClick', true);
+					return;
+				};
+				const postData = {
+					name:self.submitData.name,
+					phone:self.submitData.phone,
+					smsAuth:{
+						phone:self.submitData.phone,
+						code:self.submitData.code,
+					}
+				};
+				const callback = (res)=>{
+					if(res.solely_code==100000){
+						uni.setStorageSync('user_token', res.token);
+						uni.setStorageSync('user_info', res.info);
+						uni.setStorageSync('token_expire_time', (new Date()).getTime() + 3600000);
+						uni.showToast({
+							title: self.subType+'成功',
+							duration: 2000,
+							success:function(){
+								self.$Router.navigateTo({route:{path:'/pages/myCenter/myCenter'}})
+							}
+						});
+						
+					}else{
+						uni.showToast({
+							title: res.msg,
+							duration: 1000,
+							success:function(){
+								uni.setStorageSync('canClick', true);
+							}
+						});
+					};	
+				};
+				
+				if(self.subType == '登陆'){
+					self.$apis.login(postData, callback);
+				}else{
+					self.$apis.register(postData, callback);
+				};
+				
+			},
 
 			isShow() {
 				const self = this;
@@ -58,7 +190,7 @@
 
 			notice() {
 				const self = this;
-				self.$Utils.showToast('购买后可获得', 'none', 2000)
+				self.$Utils.showToast('购买后可获得', 'none', 1000)
 			},
 
 			isOpen() {

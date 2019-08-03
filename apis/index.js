@@ -18,10 +18,24 @@ export default {
 		http.HTTP(allParams);
 	},
 
+	
 	registerSuper(param, callback) {
 
 		var allParams = {
 			url: 'Project/Solely/registerSuper',
+			type: 'post',
+			data: param,
+			sCallback: function(data) {
+				callback && callback(data);
+			}
+		};
+		http.HTTP(allParams);
+	},
+	
+	register(param, callback) {
+
+		var allParams = {
+			url: 'Project/Solely/register',
 			type: 'post',
 			data: param,
 			sCallback: function(data) {
@@ -237,6 +251,30 @@ export default {
 		};
 		http.HTTP(allParams);
 	},
+	
+	projectAdd(param, callback) {
+		var allParams = {
+			url: 'Project/Solely/addProject',
+			type: 'post',
+			data: param,
+			sCallback: function(data) {
+				callback && callback(data);
+			}
+		};
+		http.HTTP(allParams);
+	},
+	
+	sendCode(param, callback) {
+		var allParams = {
+			url: 'Project/Solely/getCode',
+			type: 'post',
+			data: param,
+			sCallback: function(data) {
+				callback && callback(data);
+			}
+		};
+		http.HTTP(allParams);
+	},
 
 	userInfoGet(param, callback) {
 		var allParams = {
@@ -314,7 +352,7 @@ export default {
 	login(param, callback) {
 
 		var allParams = {
-			url: 'Func/Common/loginByUp',
+			url: 'Func/Common/loginByUser',
 			type: 'post',
 			data: param,
 			sCallback: function(data) {
