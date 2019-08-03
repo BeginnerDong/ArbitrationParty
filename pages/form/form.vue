@@ -238,7 +238,7 @@
 					   console.log(d);
 					   bar.style.width = schedule+'%';
 					   bar.innerHTML = schedule+'%';
-				   }
+				   };
 				   xhr.open('POST', 'http://loan.52team.top/api/public/index.php/api/v1/Base/FtpFile/upload', true);
 				   xhr.send(formData);
 				   xhr.onreadystatechange = function(){
