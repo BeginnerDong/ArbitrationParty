@@ -186,7 +186,8 @@
 		},
 
 		onLoad(options) {
-	
+			const self = this;
+			
 		},
 		
 		onShow() {

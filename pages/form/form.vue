@@ -8,7 +8,7 @@
 		<view class="cate-container">
 			<view class="title">交易类型</view>
 			<view class="lable-selt">
-				<radio-group class="radio-group" bindchange="changeSex">
+				<radio-group class="radio-group"  @change="radioChange($event,'type')">
 					<label>
 						<radio  class="selt" name="type" value="1" checked="checked"/>cpa
 					</label>
@@ -25,7 +25,7 @@
 		<view class="rolle-container">
 			<view class="title">选择我的角色</view>
 			<view class="lable-selt">
-				<radio-group class="radio-group" bindchange="changeSex">
+				<radio-group class="radio-group" @change="radioChange($event,'role')">
 					<label>
 						<radio class="selt" value="1" checked="checked"/>甲方
 					</label>
@@ -39,19 +39,19 @@
 		<view class="tel-container">
 			<view class="title" style="width:33%;">交易对方手机号</view>
 			<input v-model="submitData.phone" type="number" style="width: 40%;" placeholder="请输入对方手机号" maxlength="11" placeholder-style="color:#999999;font-size:13px; width:100%;text-align: right; left:auto; right:0" />
-			<view class="button"><button>提交</button></view>
+			<view class="button" v-if="!other.user_no" @click="searchOther"><button>提交</button></view>
 		</view>
 
-		<view class="phone-big-container">
+		<view class="phone-big-container" v-if="other.user_no">
 
-			<view class="phone-container">
+			<!-- <view class="phone-container">
 				<view class="title">交易对方手机号</view>
 				<view>18223025225</view>
-			</view>
-			<view class="info-container">
-				<view>姓名:张瑞</view>
-				<view class="score">信用分:100</view>
-				<view>已完结交易单数:5</view>
+			</view> -->
+			<view class="info-container" >
+				<view>姓名:{{other.login_name}}</view>
+				<view class="score">信用分:{{other.score}}</view>
+				<view>已完结交易单数:{{other.total_count}}</view>
 			</view>
 
 		</view>
@@ -76,7 +76,7 @@
 	<view class="img-container">
 	  <view class="title">附件</view>
 	  <!-- <input type="file"  id="custom-up" @change='upload' style='display: none !important;'> -->
-	  <view ref="input" class="input">  
+	  <view ref="input" class="input" style="display: none;">  
 
         </view> 
 	  <image @click="webSelf.$Utils.stopMultiClick(customButtonClick)" src="../../static/images/form-icon3.png"/>
@@ -84,7 +84,7 @@
 		  <view><p>可上传图片或者文件</p></view>
 		  <view><p class="p2">(可上传多张)</p></view>
 	  </view>
-	  <view v-for="item in submitData.mainImg">
+	  <view v-for="item in submitData.mainImg" :key="item.id">
 		  <image :src="item.url"></image>
 	  </view>
 	  <view class="code-container" @click="show()">
@@ -93,7 +93,7 @@
 	  </view>
 	</view>
 	
-	<view class="submit"><button>提交</button></view>
+	<view class="submit" @click="webSelf.$Utils.stopMultiClick(submit)"><button>提交</button></view>
 	
 	<!-- 客服二维码弹窗 -->
 	<view id="modal-bg" v-if="isShow"></view>
@@ -142,6 +142,14 @@
 					phone:'',
 					content:'',
 					mainImg:[],
+					role:'1',
+					partner_no:''
+				},
+				other:{
+					login_name:'',
+					score:'100',
+					total_count:'0',
+					user_no:''
 				}
 			}
 		},
@@ -167,49 +175,148 @@
 		},
 		methods: {
 			
+				searchOther(){
+					const self = this;
+					if(!self.submitData.phone){
+						uni.showToast({
+							title: '手机号未填写',
+							duration: 1000,
+							complete:function(){
+								
+							}
+						});
+						return;
+					};
+					const postData = {
+						tokenFuncName:'getProjectToken',
+						searchItem:{
+							phone:self.submitData.phone,
+							user_type:0
+						},
+						getAfter:{
+							User: {
+								tableName: 'User',
+								middleKey: 'user_no',
+								key: 'user_no',
+								condition: '=',
+								info:['login_name'],
+								searchItem: {
+									status: 1,
+								}
+							},
+							pCount:{
+								tableName:'Project',
+								middleKey:'user_no',
+								key:'user_no',
+								condition:'=',
+								searchItem:{
+									status:1
+								},
+								compute:{
+									total_count:[
+									  'count',
+									  'status',
+									  {
+										status:1,
+									  }
+									],
+								}
+							}
+						}
+					};
+					const callback = (res)=>{
+						if(res.solely_code==100000){
+							console.log('res',res)
+							if(res.info.data.length>0){
+								self.other.login_name = res.info.data[0]['User']['login_name'];
+								self.other.total_count = res.info.data[0]['pCount']['total_count'];
+								self.other.score = res.info.data[0]['score'];
+								self.other.user_no = res.info.data[0]['user_no'];
+								self.submitData.partner_no = self.other.user_no;
+							}else{
+								uni.showToast({
+									title: '手机号未注册',
+									duration: 1000,
+									success:function(){
+										
+									}
+								});
+							};
+						}else{
+							uni.showToast({
+								title: '网络故障',
+								duration: 1000,
+								success:function(){
+									uni.setStorageSync('canClick', true);
+								}
+							});
+						}
+					};
+					self.$apis.userInfoGet(postData, callback);
+				},
+			
+				radioChange(e,key){
+					console.log('e',e);
+					console.log('key',key);
+					const self = this;
+					self.submitData[key] = e.target.value;
+				},
+			
+				submit(){
+					const self = this;
+					//var pass = self.$Utils.checkComplete(self.submitData);
+					//console.log('pass',pass);
+					console.log('self.submitData',self.submitData)
+					//if(pass){
+						if(!self.other.user_no){
+							uni.showToast({
+								title: '请提交对方号码',
+								duration: 1000,
+								complete:function(){
+									uni.setStorageSync('canClick', true);
+								}
+							});
+							return;
+						};
+						const postData = {
+							tokenFuncName:'getProjectToken',
+							data:self.submitData
+						};
+						const callback = (res)=>{
+							if(res.solely_code==100000){
+								uni.showToast({
+									title: '提交成功',
+									duration: 1000,
+									complete:function(){
+										uni.setStorageSync('canClick', true);
+										setTimeout(function(){
+											self.$Router.navigateTo({route:{path:'/pages/myCenter/myCenter'}})
+										},1000)
+										
+									}
+								});
+							}else{
+								uni.showToast({
+									title: '提交失败',
+									duration: 1000,
+									complete:function(){
+										
+										uni.setStorageSync('canClick', true);
+									}
+								});
+							}
+						};
+					//};
+					self.$apis.projectAdd(postData, callback);
+					console.log('self.submitData',self.submitData);
+				},
+			
 				customButtonClick(){
 					const self = this;
 					console.log('996352',document.getElementById("custom-up"));
 					var btn = document.getElementById('custom-up');
 					btn.click();
 				},
-				
-				upload(e){
-					const self = this; 
-					
-					let file = e.target.files[0];
-					var filePath = e.target.value;
-					console.log('file',e.target.value)
-							
-					uni.uploadFile({
-						url: 'http://loan.52team.top/api/public/index.php/api/v1/Base/FtpFile/upload', //仅为示例，非真实的接口地址
-						filePath: filePath,
-						name: 'file',
-						formData: {
-							'token':uni.getStorageSync('user_token')
-						},
-						success: (uploadFileRes) => {
-							
-							if(res.solely_code==100000){
-								self.submitData.mainImg.push(res.info);
-								uni.setStorageSync('canClick', true);
-							}else{
-								uni.showToast({
-									title: res.msg,
-									duration: 2000,
-									success:function(){
-										uni.setStorageSync('canClick', true);
-									}
-								});
-							};
-							console.log(uploadFileRes.data);
-						},
-						complete:function(){
-							uni.setStorageSync('canClick', true);
-						}
-					});				
-				},
-				
 				
 				createXHR(){
 					var xhr=null;
@@ -220,54 +327,58 @@
 					return xhr;
 				 },
 				 ajax_upload(e){
+				   const self = this;
 				   var xhr = this.createXHR();
 				   var formData=new FormData();
 				   var file = e.target.files[0];
 				   var info = '文件名:'+file.name+' 文件类型:'+file.type+' 文件大小:'+file.size;
-				   var showInfo=document.getElementById('showinfo');
+				   /* var showInfo=document.getElementById('showinfo');
 				   var bar=document.getElementById('bar');
 				   var progress=document.getElementById('progress');
-				   showInfo.innerHTML= info;
-				   formData.append('pic', file);
+				   showInfo.innerHTML= info; */
+				   formData.append('file', file);
+				   formData.append('token', uni.getStorageSync('user_token'));
 				   var schedule = 0;
 					//xhr.upload.onprogress是回调函数，接收参数d是ProgressEvent对象，d.loaded表示已经上传的，d.total表示文件总大小。
-				   xhr.upload.οnprοgress=function(d){
+				   /* xhr.upload.οnprοgress=function(d){
 					   progress.style.display='block';
 					   schedule = d.loaded/d.total*100;
 					   schedule = schedule.toFixed(2);
 					   console.log(d);
 					   bar.style.width = schedule+'%';
 					   bar.innerHTML = schedule+'%';
-				   };
+				   }; */
 				   xhr.open('POST', 'http://loan.52team.top/api/public/index.php/api/v1/Base/FtpFile/upload', true);
 				   xhr.send(formData);
 				   xhr.onreadystatechange = function(){
 					 if( this.readyState == 4 && this.status == 200){
-						showInfo.innerHTML = showInfo.innerHTML+'<br />'+this.responseText;
-						progress.style.display = 'none';
+						var res = JSON.parse(this.responseText);
+						if(res.solely_code==100000){
+							
+							self.submitData.mainImg.push({
+								url:res.info.url,
+								type:file.type,
+								name:file.name
+							});
+							uni.setStorageSync('canClick', true);
+						}else{
+							uni.showToast({
+								title: '上传失败',
+								duration: 1000,
+								success:function(){
+									uni.setStorageSync('canClick', true);
+								}
+							});
+						};
+						/* showInfo.innerHTML = showInfo.innerHTML+'<br />'+this.responseText;
+						progress.style.display = 'none'; */
 					 }
 				   }
 				   document.getElementById('custom-up').value = '';
 				 },
 
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-		
 				show() {
 					const self = this;
-					
 					self.isShow = !self.isShow
 				},
 		

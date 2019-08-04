@@ -129,21 +129,21 @@
 					uni.setStorageSync('canClick', true);
 					return;
 				};
-				if(!self.submitData.code){
+				/* if(!self.submitData.code){
 					uni.showToast({
 						title: '请填写验证码',
 						duration: 1000
 					});
 					uni.setStorageSync('canClick', true);
 					return;
-				};
+				}; */
 				const postData = {
 					name:self.submitData.name,
 					phone:self.submitData.phone,
-					smsAuth:{
+					/* smsAuth:{
 						phone:self.submitData.phone,
 						code:self.submitData.code,
-					}
+					} */
 				};
 				const callback = (res)=>{
 					if(res.solely_code==100000){
