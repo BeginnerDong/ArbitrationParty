@@ -20,19 +20,24 @@ Vue.prototype.$apis = $apis
 Vue.prototype.$AssetsConfig = $AssetsConfig
 Vue.prototype.$Config = $Config
 Vue.prototype.$Router = $Router
+Vue.prototype.$Token = $Token
 Vue.prototype.$jweixin = jweixin
 Vue.config.productionTip = false
 
 $Router.beforeEach((navType, to) => {
+	
 	if (to.route === undefined) throw ("路由钩子函数中没有找到to.route对象，路由信息:" + JSON.stringify(to));
 
-	/* if (to.route.path === $RoutesConfig.login.path && store.getters.hasLogin) {
-		uni.redirectTo({
-			url: $Utils.objParseUrlAndParam($RoutesConfig.main.path, to.query)
-		})
-		return;
-	}; */
-	console.log('url',$Utils.objParseUrlAndParam(to.route.path, to.query))
+	if (to.route.path!='/pages/index/index') {
+		var token = uni.getStorageSync('user_token');
+		var token_expire_time = uni.getStorageSync('token_expire_time');
+		if (!token||token_expire_time<(new Date()).getTime()) {
+		    uni.reLaunch({
+		    	url: '/pages/index/index'
+		    });
+		};
+	};
+
 	uni[navType]({
 		url: $Utils.objParseUrlAndParam(to.route.path, to.query)
 	})

@@ -2,18 +2,20 @@
 	<view class="myCtfcation">
 		<view class="item-lis">
 			<view class="tit">收款人姓名：</view>
-			<input class="write" type="text" placeholder="请输入收款人姓名">
+			<input v-model="submitData.name" class="write" type="text" placeholder="请输入收款人姓名">
 		</view>
 		<view class="item-lis">
 			<view class="tit">开户行：</view>
-			<input class="write" type="text" placeholder="请输入银行的开户行">
+			<input v-model="submitData.bank" class="write" type="text" placeholder="请输入银行的开户行">
 		</view>
 		<view class="item-lis" style="padding-left: 220rpx;">
 			<view class="tit" style="width:220rpx">收款银行卡号：</view>
-			<input class="write" type="text" placeholder="请输入收款账号">
+			<input v-model="submitData.idCard" class="write" type="text" placeholder="请输入收款账号">
 		</view>
 		
-		<view><button  class="okBtn">提交</button></view>
+		<view>
+			<button  class="okBtn" @click="webSelf.$Utils.stopMultiClick(submit)" >提交</button>
+		</view>
 	</view>
 </template>
 
@@ -23,20 +25,95 @@
 			return {
 				webSelf: this,
 				whether:false,
-                num:0
+                num:0,
+				submitData:{
+					bank:'',
+					idCard:'',
+					name:''
+				}
 			} 	
 		},
-
+		
 		onLoad(options) {
-	
+			const self = this;
+			uni.setStorageSync('canClick', true);
+			self.$Utils.loadAll(['getUserInfo'], self);
 		},
 		
 		onShow() {
 			const self = this;
 			document.title = '实名认证'			
 		},
-
-		methods: {		
+		
+		methods: {	
+			getUserInfo(){
+				const self = this;
+				const postData = {
+					tokenFuncName:'getProjectToken',
+					searchItem:{
+						user_no:uni.getStorageSync('user_info').user_no
+					}
+				};
+				const callback = (res)=>{
+					if(res.solely_code==100000){
+						if(res.info.data.length>0){
+							self.submitData.bank = res.info.data[0].bank;
+							self.submitData.idCard = res.info.data[0].idCard;
+							self.submitData.name = res.info.data[0].name;
+							
+						}else{
+							uni.showToast({
+								title: '无数据',
+								duration: 1000,
+								complete:function(){
+								}
+							});
+						}
+		
+					}else{
+						uni.showToast({
+							title: res.msg,
+							duration: 1000,
+							complete:function(){
+							}
+						});
+					};
+					self.$Utils.finishFunc('getUserInfo');
+				};
+				self.$apis.userInfoGet(postData, callback);
+			},
+			submit(){
+				const self = this;
+				const postData = {
+					tokenFuncName:'getProjectToken',
+					data:self.submitData
+				};
+				const callback = (res)=>{
+					if(res.solely_code==100000){
+						uni.showToast({
+							title: '提交成功',
+							duration: 1000,
+							complete:function(){
+								uni.setStorageSync('canClick', true);
+								setTimeout(function(){
+									uni.navigateBack({
+										delta: 1
+									});
+								},1000);	
+							}
+						});
+					}else{
+						uni.showToast({
+							title: '提交失败',
+							duration: 1000,
+							complete:function(){
+								uni.setStorageSync('canClick', true);
+							}
+						});
+					}
+				};
+				self.$apis.userInfoUpdate(postData, callback);
+			}
 		}
 	}
 </script>

@@ -1,12 +1,12 @@
 <template>
 <view class="container">
 	<view class="nickname-container">
-		<image src="../../static/images/about-img.png"/>
+		<!-- <image :src="wx_info.hedaImgUrl?wx_info.hedaImgUrl:'../../static/images/about-img.png'"/> -->
 		<view class="nickname-img">
-			<view class="nickname">昵称昵称昵称</view>
+			<view class="nickname">{{login_name}}</view>
 			<view class="score">
 				<image src="../../static/images/about-icon1.png"/>
-				<text>信誉分:230</text>
+				<text>信誉分:{{score}}</text>
 			</view>
 		</view>
 	</view>
@@ -101,12 +101,28 @@
 		data() {
 			return {
 				webSelf: this,
-				showView: false
+				showView: false,
+				score:'',
+				login_name:'',
+				wx_info:{}
 			}
 		},
 
 		onLoad(options) {
-	
+			const self = this;
+			self.score = uni.getStorageSync('user_info').info.score;
+			self.login_name = uni.getStorageSync('user_info').login_name;
+			/* var ua = navigator.userAgent.toLowerCase();//获取判断用的对象
+			if (ua.match(/MicroMessenger/i) == "micromessenger") {
+					var wx_info_expire_time = uni.getStorageSync('wx_info_expire_time');
+					var wx_info = uni.getStorageSync('wx_info');
+					if(!wx_info||wx_info_expire_time<(new Date()).getTime()){
+						self.$Token.getWeixinToken();
+					}else{
+						self.wx_info = wx_info;
+					};
+			}; */
+
 		},
 		
 		onShow() {

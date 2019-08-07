@@ -45,6 +45,44 @@ export default {
 		http.HTTP(allParams);
 	},
 	
+	projectGet(param, callback) {
+		var allParams = {
+			url: 'Common/Project/get',
+			type: 'post',
+			noToken: true,
+			data: param,
+			sCallback: function(data) {
+				callback && callback(data);
+			}
+		};
+		http.HTTP(allParams);
+	},
+	processGet(param, callback) {
+		var allParams = {
+			url: 'Common/Process/get',
+			type: 'post',
+			noToken: true,
+			data: param,
+			sCallback: function(data) {
+				callback && callback(data);
+			}
+		};
+		http.HTTP(allParams);
+	},
+	
+	processAdd(param, callback) {
+		var allParams = {
+			url: 'Common/Process/add',
+			type: 'post',
+			noToken: true,
+			data: param,
+			sCallback: function(data) {
+				callback && callback(data);
+			}
+		};
+		http.HTTP(allParams);
+	},
+	
 	clockIn(param, callback) {
 	
 		var allParams = {

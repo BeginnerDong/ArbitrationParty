@@ -130,7 +130,6 @@
 | role | tinyint(2) | 1.甲方2.乙方 |
 
 
-
 ### process表-new（type=3）
 
 | 字段 | 类型 | 说明 |

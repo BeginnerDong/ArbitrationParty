@@ -2,19 +2,17 @@
 	<view class="arbitral-big-container">
 		
 		<view class="arbitral-container">
-			
-			<view class="arbitral-img-text">
+			<view class="arbitral-img-text" @click="arbitration_type=1">
 				<image src="../../static/images/apply-icon2.png"/>
-				<view>平台仲裁</view>
+				<view :style="arbitration_type==1?'color:red':''">平台仲裁</view>
 			</view>
-			
-			<view class="arbitral-img-text">
+			<view class="arbitral-img-text" @click="arbitration_type=2">
 				<image src="../../static/images/apply-icon4.png"/>
-				<view>全民仲裁</view>
+				<view :style="arbitration_type==2?'color:red':''">全民仲裁</view>
 			</view>
 		</view>
 		
-		<view class="button" @click="webSelf.$Router.navigateTo({route:{path:'/pages/applyArbUpPic/applyArbUpPic'}})"><button>下一步</button></view>
+		<view class="button" @click="webSelf.$Router.navigateTo({route:{path:'/pages/applyArbUpPic/applyArbUpPic?project_no='+project_no+'&arbitration_type='+arbitration_type}})"><button>下一步</button></view>
     </view>
 </template>
 
@@ -23,12 +21,15 @@
 		data() {
 			return {
 				webSelf: this,
-				isShow:false
+				isShow:false,
+				arbitration_type:1,
+				project_no:''
 			}
 		},
 	
 		onLoad(options) {
-	
+			const self = this;
+			self.project_no = options.project_no;
 		},
 		
 		onShow() {

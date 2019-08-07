@@ -79,14 +79,18 @@
 	  <view ref="input" class="input" style="display: none;">  
 
         </view> 
-	  <image @click="webSelf.$Utils.stopMultiClick(customButtonClick)" src="../../static/images/form-icon3.png"/>
+	  <image @click="webSelf.$Utils.stopMultiClick(upload)" src="../../static/images/form-icon3.png"/>
 	  <view class="text-container">
 		  <view><p>可上传图片或者文件</p></view>
+		  <view><p>上传点击无效请点击右上角复制链接，用其他手机浏览器打开</p></view>
+		  
 		  <view><p class="p2">(可上传多张)</p></view>
 	  </view>
-	  <view v-for="item in submitData.mainImg" :key="item.id">
-		  <image :src="item.url"></image>
-	  </view>
+	  
+	  <template v-for="item in submitData.mainImg" >
+	  	<image :key="item.id" v-if="item.type=='image'" :src="item.url"></image>
+	  	<view :key="item.id" v-else >{{item.name}}</view>
+	  </template>
 	  <view class="code-container" @click="show()">
 		  <view>客服二维码</view>
 		  <image src="../../static/images/form-img1.png"/>
@@ -126,11 +130,17 @@
 		</view>		
 	</view>
 	<!--底部tab键-->
+	
+	<cUpload @uploadAfter="uploadAfter" ref="cUpload" ></cUpload>
 </view>
 </template>
 
 <script>
+	import cUpload from "@/components/upload/upload.vue"
 	export default {
+		components: {
+			cUpload
+		},
 		data() {
 			return {
 				webSelf: this,
@@ -154,15 +164,6 @@
 			}
 		},
 		
-		mounted() {  
-            var input = document.createElement('input')  
-            input.type = 'file';
-            input.id = 'custom-up';  
-            input.onchange = (event) => {  
-                this.ajax_upload(event);
-            };
-            this.$refs.input.$el.appendChild(input);  
-        },
 	
 		onLoad(options) {
 			const self = this;
@@ -311,77 +312,19 @@
 					console.log('self.submitData',self.submitData);
 				},
 			
-				customButtonClick(){
+				upload(){
 					const self = this;
-					console.log('996352',document.getElementById("custom-up"));
-					var btn = document.getElementById('custom-up');
-					btn.click();
+					self.$refs.cUpload.customButtonClick();
 				},
-				
-				createXHR(){
-					var xhr=null;
-				   if(window.XMLHttpRequest)  //要是支持XMLHttpRequest的则采用XMLHttpRequest生成对象
-					  xhr=new XMLHttpRequest();
-				   else if(window.ActiveXobiect)//要是支持win的ActiveXobiect则采用ActiveXobiect生成对象。
-					 xhr=new ActiveXobiect('Microsoft.XMLHTTP');
-					return xhr;
-				 },
-				 ajax_upload(e){
-				   const self = this;
-				   var xhr = this.createXHR();
-				   var formData=new FormData();
-				   var file = e.target.files[0];
-				   var info = '文件名:'+file.name+' 文件类型:'+file.type+' 文件大小:'+file.size;
-				   /* var showInfo=document.getElementById('showinfo');
-				   var bar=document.getElementById('bar');
-				   var progress=document.getElementById('progress');
-				   showInfo.innerHTML= info; */
-				   formData.append('file', file);
-				   formData.append('token', uni.getStorageSync('user_token'));
-				   var schedule = 0;
-					//xhr.upload.onprogress是回调函数，接收参数d是ProgressEvent对象，d.loaded表示已经上传的，d.total表示文件总大小。
-				   /* xhr.upload.οnprοgress=function(d){
-					   progress.style.display='block';
-					   schedule = d.loaded/d.total*100;
-					   schedule = schedule.toFixed(2);
-					   console.log(d);
-					   bar.style.width = schedule+'%';
-					   bar.innerHTML = schedule+'%';
-				   }; */
-				   xhr.open('POST', 'http://loan.52team.top/api/public/index.php/api/v1/Base/FtpFile/upload', true);
-				   xhr.send(formData);
-				   xhr.onreadystatechange = function(){
-					 if( this.readyState == 4 && this.status == 200){
-						var res = JSON.parse(this.responseText);
-						if(res.solely_code==100000){
-							
-							self.submitData.mainImg.push({
-								url:res.info.url,
-								type:file.type,
-								name:file.name
-							});
-							uni.setStorageSync('canClick', true);
-						}else{
-							uni.showToast({
-								title: '上传失败',
-								duration: 1000,
-								success:function(){
-									uni.setStorageSync('canClick', true);
-								}
-							});
-						};
-						/* showInfo.innerHTML = showInfo.innerHTML+'<br />'+this.responseText;
-						progress.style.display = 'none'; */
-					 }
-				   }
-				   document.getElementById('custom-up').value = '';
-				 },
-
+				uploadAfter(res){
+					const self = this;
+					uni.setStorageSync('canClick', true);
+					self.submitData.mainImg.push(res);
+				},
 				show() {
 					const self = this;
 					self.isShow = !self.isShow
 				},
-		
 				notice() {
 					const self = this;
 					self.$Utils.showToast('购买后可获得', 'none', 2000)

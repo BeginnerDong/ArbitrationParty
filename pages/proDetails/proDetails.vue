@@ -9,62 +9,61 @@
 			</view>
 		</view>
 		<view class="tab-con">
-			<view v-show="num===0">
+			<view v-if="num===0">
 				<view class="container">
 					<view class="name-container">
 						<view class="title">产品名称</view>
-						<input type="text" disabled="true" placeholder="产品名称产品名称" placeholder-style="color:rgb(34,34,34);font-size:13px;" />
+						<input v-model="mainData.title" type="text" disabled="true"  placeholder-style="color:rgb(34,34,34);font-size:13px;" />
 					</view>
 
 					<view class="cate-container">
 						<view class="title">交易类型</view>
-						<input type="text" disabled="true" placeholder="uv" placeholder-style="color:rgb(34,34,34);font-size:13px;" />
+						{{mainData.type==1?'cpa':(mainData.type==2?'cps':'uv')}}
 					</view>
 
 					<view class="rolle-container">
 						<view class="title">选择我的角色</view>
-						<input type="text" disabled="true" placeholder="乙方" placeholder-style="color:rgb(34,34,34);font-size:13px;" />
+						{{mainData.Role&&mainData.Role.role==1?'甲方':'乙方'}}
 					</view>
 
 					<view class="phone-big-container">
 						<view class="phone-container">
-							<view class="title">填写交易对方手机号</view>
-							<input type="text" disabled="true" placeholder="18223025225" placeholder-style="color:rgb(34,34,34);font-size:13px;" />
+							<view class="title">交易对方手机号</view>
+							{{mainData.phone}}
 						</view>
 						<view class="info-container">
-							<view><text>姓名:</text>张瑞</view>
-							<view class="score"><text>信用分:</text>100</view>
-							<view><text>已完结交易单数:</text>5</view>
+							<view><text>姓名:</text>{{mainData.User&&mainData.User.login_name}}</view>
+							<view class="score"><text>信用分:</text>{{mainData.UserInfo&&mainData.UserInfo.score}}</view>
+							<view><text>已完结交易单数:</text>{{mainData.pCount&&mainData.pCount.total_count}}</view>
 						</view>
 					</view>
 
 					<view class="sum-container">
 						<view class="title">交易金额</view>
-						<input type="text" disabled="true" placeholder="56236" placeholder-style="color:red;font-size:13px;" />
+						{{mainData.price}}
 					</view>
 
 					<view class="name-container">
 						<view class="title">交易内容</view>
-						<input type="text" disabled="true" placeholder="不刷量,不分销" placeholder-style="color:#000;font-size:13px;" />
+						不刷量,不分销
 					</view>
 
 					<view class="tip-container">
 						<view class="title">增加内容</view>
-						<textarea type="text" placeholder="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
-						 placeholder-style="color:#999999;font-size:13px;" />
+						{{mainData.content}}
 					</view>
 	   	<view class="img-container">
 					<view class="title">附件</view>
 					<view class="img-little-container">
-						<image src="../../static/images/img.png"/>
-						<image src="../../static/images/img.png"/>
-						<image src="../../static/images/img.png"/>
-						<image src="../../static/images/img.png"/>
-						<image src="../../static/images/img.png"/>
+						<template v-for="item in mainData.mainImg" >
+							<image :key="item.id" v-if="item.type=='image'" :src="item.url"></image>
+							<view @click="downLoad(item.url)" :key="item.id" v-else >{{item.name}}</view>
+						</template>
+						
 					</view>
 				</view>
 		
-				<view class="flat-info">
+				<view class="flat-info" v-if="mainData.Role&&mainData.Role.role==1">
 					<view class="phone-big-container">
 
 						<view class="phone-container">
@@ -72,21 +71,22 @@
 						</view>
 						<view class="info-container">
 							<view>付款账号</view>
-							<input type="text" disabled="true" placeholder="123356968963332" placeholder-style="color:#000;font-size:13px;" />
+							{{thirdInfo.account}}
 						</view>
-					
 					</view>
 					
 					<view class="phone-container" style="border-bottom:1px solid #F1F1F1;">
 						<view class="title">姓名</view>
-						<input type="text" disabled="true" placeholder="张三" placeholder-style="color:rgb(34,34,34);font-size:13px;" />
+						{{thirdInfo.name}}
 					</view>
 				</view>
 	   	
 				<view class="button-big-container">
 					<view class="button-container">
-						<view class="button" @click="webSelf.$Router.navigateTo({route:{path:'/pages/applyArbitral/applyArbitral'}})"><button>申请仲裁</button></view>
-						<view class="button" @click="webSelf.$Router.navigateTo({route:{path:'/pages/voucher/voucher'}})"><button>上传付款凭证</button></view>
+						{{mainData.step}}
+						<view v-if="mainData.step!=2&&mainData.arbitration_step==0" class="button" @click="webSelf.$Router.navigateTo({route:{path:'/pages/applyArbitral/applyArbitral?project_no='+project_no+'&role'+mainData.Role.role}})"><button>申请仲裁</button></view>
+						<view v-if="mainData.step!=2&&mainData.Role&&mainData.Role.role==1" class="button" @click="webSelf.$Router.navigateTo({route:{path:'/pages/voucher/voucher?project_no='+project_no+'&role'+mainData.Role.role}})"><button>上传付款凭证</button></view>
+						<view v-if="mainData.step!=2&&mainData.Role&&mainData.Role.role==2" class="button" @click="webSelf.$Router.navigateTo({route:{path:'/pages/applyPay/applyPay?project_no='+project_no+'&role'+mainData.Role.role}})"><button>申请付款</button></view>
 					</view>
 					<view class="platform" @click="show()">
 					  <image src="../../static/images/apply-icon5.png"/>
@@ -106,22 +106,22 @@
 	   <!-- 弹窗 -->
 	   
 	</view>
-	<view v-show="num===1">
+	<view v-if="num===1">
 	   <!--项目动态 -->
-	     <view class="dynamic-big-container">
-			 
-			 <view class="dynamic-container" v-for="(item,index) in dynami" :key="index">
+	     <view class="dynamic-big-container"> 
+			 <view class="dynamic-container" style="height: 100%;" v-for="(item,index) in messageData" :key="index">
 				 <view class="date-container">
 					<!-- 乙方的名子颜色 style="color:rgb(38,199,72);" -->
-					 <view class="jia">{{item.nameA}}</view>
-					 <view class="date">{{item.time}}</view>
+					 <view class="jia">{{item.Role.role==1?'甲方':'乙方'}}</view>
+					 <view class="date">{{item.create_time}}</view>
 				 </view>
-				 <view class="content">{{item.cont}}</view>
-				 <image :src="item.urlPic"/>
-			 </view>
-			 
-			 
-			  <view class="button" @click="webSelf.$Router.navigateTo({route:{path:'/pages/addDynamic/addDynamic'}})"><button>添加动态</button></view>
+				 <view class="content">{{item.content}}</view>
+				 <template v-for="c_item in item.mainImg" >
+				 	<image :key="c_item.id" v-if="c_item.type=='image'" :src="c_item.url"></image>
+				 	<view :key="c_item.id" v-else >{{c_item.name}}</view>
+				 </template>
+			</view>
+			<view class="button" @click="webSelf.$Router.navigateTo({route:{path:'/pages/addDynamic/addDynamic?project_no='+project_no+'&role'+mainData.Role.role}})"><button>添加动态</button></view>
 		 </view>
 	   <!--项目动态 -->
 	</view>
@@ -138,46 +138,193 @@
 				whether:false,
                 num:0,
 				isShow:false,
-				dynami:[
-					{
-						nameA:"甲方",
-						time:"2019.07.30",
-						cont:"内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容",
-						urlPic:"../../static/images/dynamic-img.png"
-					},
-					{
-						nameA:"乙方",
-						time:"2019.07.30",
-						cont:"内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容",
-						urlPic:"../../static/images/dynamic-img.png"
-					},
-					{
-						nameA:"乙方",
-						time:"2019.07.30",
-						cont:"内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容",
-						urlPic:"../../static/images/dynamic-img.png"
-					},
-					{
-						nameA:"乙方",
-						time:"2019.07.30",
-						cont:"内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容",
-						urlPic:"../../static/images/dynamic-img.png"
-					}
-				]
+				project_no:'',
+				mainData:{},
+				thirdInfo:{
+					name:'',
+					account:''
+				},
+				messageData:[],
+				paginate:{},
 			}
 		},
 
 		onLoad(options) {
-	
+			const self = this;
+			self.project_no = options.project_no;
+			self.thirdInfo.name = uni.getStorageSync('user_info').thirdApp.name;
+			self.thirdInfo.account = uni.getStorageSync('user_info').thirdApp.account;
+			self.paginate = self.$Utils.cloneForm(self.$AssetsConfig.paginate);
+			
 		},
 		
 		onShow() {
 			const self = this;
-			document.title = '项目详情'			
+			self.$Utils.loadAll(['getMainData','getProcessData'], self);
+		},
+		
+		onReachBottom(){
+			console.log('onReachBottom')
+			const self = this;
+			if(self.num==1&&!self.isLoadAll&&uni.getStorageSync('canClick')){
+				self.paginate.currentPage++;
+				self.getProcessData()
+			};	
 		},
 
 
 		methods: {
+			
+			downLoad(url){
+				window.open(url)
+			},
+			
+			getMainData() {
+				const self = this;
+				const postData = {
+					tokenFuncName:'getProjectToken',
+					searchItem:{
+						project_no:self.project_no
+					},
+					getAfter:{
+						
+						UserInfo:{
+							tableName: 'UserInfo',
+							middleKey: 'phone',
+							key: 'phone',
+							condition: '=',
+							info:['score','user_no'],
+							searchItem: {
+								status: 1,
+								user_type:0
+							}
+						},
+						User: {
+							tableName: 'User',
+							middleKey: ['UserInfo','user_no'],
+							key: 'user_no',
+							condition: '=',
+							info:['login_name'],
+							searchItem: {
+								status: 1,
+							}
+						},
+						pCount:{
+							tableName:'Project',
+							middleKey: ['UserInfo','user_no'],
+							key:'user_no',
+							condition:'=',
+							searchItem:{
+								status:1,
+								step:2
+							},
+							compute:{
+								total_count:[
+								  'count',
+								  'status',
+								  {
+									status:1,
+								  }
+								],
+							}
+						},
+						
+						Role: {
+							tableName: 'Relation',
+							middleKey: 'status',
+							key: 'status',
+							condition: '=',
+							info:['role'],
+							searchItem: {
+								relation_two:uni.getStorageSync('user_info').user_no,
+								relation_one:self.project_no
+							}
+						}
+					},
+					
+				};
+
+				
+				const callback = (res)=>{
+					if(res.solely_code==100000){
+						if(res.info.data.length>0){
+							self.mainData = res.info.data[0];
+						}else{
+							uni.showToast({
+								title: 'id有误',
+								duration: 1000,
+								success:function(){
+									
+								}
+							});
+						};
+					}else{
+						uni.showToast({
+							title: '网络故障',
+							duration: 1000,
+							success:function(){	
+							}
+						});
+					};
+					self.$Utils.finishFunc('getMainData');
+				};
+				self.$apis.projectGet(postData, callback);
+				
+			},
+			
+			getProcessData(isNew){
+				const self = this;
+				if(isNew){
+					self.paginate = self.$Utils.cloneForm(self.$AssetsConfig.paginate);
+					self.messageData = [];
+				};
+				const postData = {
+					searchItem:{
+						project_no:self.project_no,
+						type:1
+					},
+					paginate:self.$Utils.cloneForm(self.paginate),
+					getAfter:{
+						Role: {
+							tableName: 'Relation',
+							middleKey: 'status',
+							key: 'status',
+							condition: '=',
+							info:['role'],
+							searchItem: {
+								relation_two:uni.getStorageSync('user_info').user_no,
+								relation_one:self.project_no
+							}
+						}
+					}
+				};
+				const callback = (res)=>{
+					if(res.solely_code==100000){
+						if(res.info.data.length>0){
+							self.messageData.push.apply(self.messageData, res.info.data);	
+						}else{
+							self.isLoadAll = true;
+							uni.showToast({
+								title: '没有更多了',
+								duration: 1000,
+								success:function(){
+									
+								}
+							});
+						}
+					}else{
+						uni.showToast({
+							title: '网络故障',
+							duration: 1000,
+							success:function(){
+								
+							}
+						});
+					};
+					self.$Utils.finishFunc('getProcessData');
+				};
+				self.$apis.processGet(postData, callback);
+			},
 
 			show() {
 				const self = this;
@@ -190,17 +337,8 @@
 				const self = this;
 				self.num = num;
 			}						
-	},
-	handleScroll() {
-      var scrollTop =
-        window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-      // console.log(scrollTop)
-      if(scrollTop>329){
-        this.whether = true;
-      }else{
-        this.whether = false;
-      }
-    }
+		},
+	
 	}
 </script>
 

@@ -39,7 +39,7 @@
 			"path": "pages/proDetails/proDetails",
 			"style": {
 				"navigationBarTitleText": "项目详情", //设置页面标题文字
-				"onReachBottomDistance": 100
+				"onReachBottomDistance": 300
 			}
 		},
 		{
@@ -119,8 +119,8 @@
 				"onReachBottomDistance": 100
 			}
 		}
-		
-	]
+
+    ]
 // 	"globalStyle": {
 // 		"navigationStyle": "custom"
 // 

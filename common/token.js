@@ -12,16 +12,25 @@ class Token {
     }
 	
     verify() { 
-        var token = uni.getStorageSync('token');
-        if (!token) {
-            this.getUserInfo();
-        };
+		
+        var token = uni.getStorageSync('user_token');
+        var token_expire_time = uni.getStorageSync('token_expire_time');
+		
+        if (!token||token_expire_time<(new Date()).getTime()) {
+            return false;
+        }else{
+			return true
+		}
     }
 	
 	getProjectToken(callback,postData) { 
 		
 		//return uni.getStorageSync('user_token');
 	    if((postData&&postData.refreshToken)||!uni.getStorageSync('user_token')){
+			uni.redirectTo({
+			  url: '/pages/index/index'
+			});
+			return;
 	        var params = {
 	            thirdapp_id:2,
 				refreshToken:true
@@ -75,9 +84,11 @@ class Token {
             var c_callback = (res)=>{
                 console.log('c_callback-res',res)    
                 if(res.token){
-                    uni.setStorageSync('user_token',res.token);
+                    /* uni.setStorageSync('user_token',res.token);
                     uni.setStorageSync('user_no',res.info.user_no);
-                    uni.setStorageSync('user_info',res.info);
+                    uni.setStorageSync('user_info',res.info); */
+					uni.setStorageSync('wx_info',res.info);
+					uni.setStorageSync('wx_info_expire_time',(new Date()).getTime()+86400000);
                     callback&&callback();
                 }else{
                     alert('获取token失败')
@@ -114,9 +125,9 @@ class Token {
 			        
 			    }
 			})
-        }else if(uni.getStorageSync('user_token')&&!params.refreshToken){
+        }/* else if(uni.getStorageSync('user_token')&&!params.refreshToken){
             callback&&callback();
-        }else{
+        } */else{
            
 			href =  href + hash;
 			if(param.sub_appid&&param.sub_appsecret){
