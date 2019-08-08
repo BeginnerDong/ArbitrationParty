@@ -2,8 +2,8 @@
 	
 	<view class="attPro-container">
 	   <view class="banner-container" :class="{fixTitle:whether}">
-			<view @click="num=0" :class="{'active-item':num===0}"  class="item"><view class="text">进行中</view></view>
-			<view @click="num=1" :class="{'active-item':num===1}"  class="item"><view class="text">已完结</view></view>
+			<view @click="num=0" :class="{'active-item':num===0}" class="item"><view class="text">进行中</view></view>
+			<view @click="num=1" :class="{'active-item':num===1}" class="item"><view class="text">已完结</view></view>
 		</view>
 		<view class="tab-con">
 			<view class="tip-big-container" >

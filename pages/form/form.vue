@@ -36,24 +36,22 @@
 			</view>
 		</view>
 
-		<view class="formLis tel-container" style="padding-right: 120rpx;">
+		<view class="formLis tel-container" style="padding-top: 10rpx;padding-right: 120rpx;">
 			<view class="title">交易对方手机号码</view>
 				<input class="test" v-model="submitData.phone" type="number" placeholder="请输入对方手机号" maxlength="11" placeholder-style=" color:#999999;font-size:28rpx;" style="width:320rpx;text-align: right;"/>
 			<view class="button" v-if="!other.user_no" @click="searchOther"><button>提交</button></view>
 		</view>
 
-		<view class="formLis phone-big-container" v-if="other.user_no">
-
+		<view class="formLis phone-big-container" v-if="other.user_no" style="height: 70rpx;padding-bottom: 14rpx;margin-top: -10rpx; background: #fff;">
+			
+			<view>姓名:{{other.login_name}}</view>
+			<view class="score">信用分:{{other.score}}</view>
+			<view>已完结交易单数:{{other.total_count}}</view>
+			
 			<!-- <view class="phone-container">
 				<view class="title">交易对方手机号</view>
 				<view>18223025225</view>
 			</view> -->
-			<view class="info-container" >
-				<view>姓名:{{other.login_name}}</view>
-				<view class="score">信用分:{{other.score}}</view>
-				<view>已完结交易单数:{{other.total_count}}</view>
-			</view>
-
 		</view>
 
 		<view class="formLis sum-container">

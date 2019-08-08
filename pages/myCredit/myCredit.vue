@@ -148,12 +148,12 @@
 .topCont .name{ line-height: 40rpx; font-size: 30rpx;padding-top: 36rpx;;}
 .topCont .name image{ display: inline-block; width: 34rpx; height:30rpx ;margin-right: 10rpx; vertical-align: middle;}
 
-.xyuContLis .item{ padding:36rpx 3%; overflow: hidden; height: 150rpx; border-bottom: 2rpx solid #e1e1e1;box-sizing: border-box;}
+.xyuContLis .item{ padding:30rpx 3%; overflow: hidden; height: 140rpx; border-bottom: 2rpx solid #e1e1e1;box-sizing: border-box;}
 
 .xyuContLis .left{ width: 80%;float: left;}
 .xyuContLis .left .tit{ width: 100%; height: 30rpx; line-height: 30rpx; overflow: hidden;text-overflow: ellipsis;white-space: normal; font-size: 30rpx; ;}
-.xyuContLis .left .data{ color: #999; font-size: 26rpx;padding-top: 12rpx;}
-.xyuContLis .right{ width: 20%; float: right; color: #ff5050; font-size: 34rpx; text-align: right;height: 100%; padding-top: 20rpx; box-sizing: border-box;}
+.xyuContLis .left .data{ color: #999; font-size: 26rpx;padding-top: 16rpx;}
+.xyuContLis .right{ width: 20%; float: right; color: #ff5050; font-size: 34rpx; text-align: right;height: 100%; padding-top: 18rpx; box-sizing: border-box;}
 
 
 </style>

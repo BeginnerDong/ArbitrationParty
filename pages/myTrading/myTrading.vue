@@ -106,7 +106,7 @@
 							}
 						});
 					};
-					self.$Utils.finishFunc('getProcessData');
+					self.$Utils.finishFunc('getMainData');
 				};
 				self.$apis.processGet(postData, callback);
 			},
@@ -117,9 +117,11 @@
 
 <style>
 	@import "../../assets/style/myArbitral.css";
-	.tip-container{ padding: 0 3%; box-sizing:border-box;}
-	.tip-container .tip{ width: 100%; box-sizing:border-box; border-bottom: 2rpx solid #e1e1e1;padding: 0; position: relative; padding-left: 80px;}
-	.tip-container .tip:first-child{padding-left: 50px;}
+	page{background-color:rgb(245,245,245);}
+	.tip-container{width:94%; padding: 10rpx 30rpx; box-sizing:border-box;box-shadow: 0 0 16rpx rgba(0,0,0,0.1);}
+	.tip-container .tip{ width: 100%; height: 100rpx; box-sizing:border-box; border-bottom: 2rpx solid #e1e1e1;padding: 0; position: relative; padding-left: 160rpx;}
+	.tip-container .tip:last-child{border-bottom: none;}
+	.tip-container .tip:first-child{padding-left: 100rpx;}
 	.tip .title{box-sizing:border-box;width: auto;padding:0;position: absolute; left: 0;}
 	.tip .name{ width:100%; overflow: hidden;white-space: nowrap;text-overflow: ellipsis;-o-text-overflow: ellipsis;}
 	.tip .name.pub-red{ color: #ff3b3b;}

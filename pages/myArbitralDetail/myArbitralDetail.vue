@@ -18,18 +18,24 @@
 
 					<view class="cate-container formLis">
 						<view class="title">交易类型</view>
-						{{mainData.type==1?'cpa':(mainData.type==2?'cps':'uv')}}
+						<view class="r_cont">
+							{{mainData.type==1?'cpa':(mainData.type==2?'cps':'uv')}}
+						</view>
 					</view>
 
 					<view class="rolle-container formLis">
 						<view class="title">选择我的角色</view>
+						<view class="r_cont">
 						{{mainData.Role&&mainData.Role.role==1?'甲方':'乙方'}}
+						</view>
 					</view>
 
 					<view class="phone-big-container">
 						<view class="phone-container formLis" style="border-bottom:none; height: 76rpx;padding-top: 10rpx;">
 							<view class="title">交易对方手机号</view>
-							{{mainData.phone}}
+							<view class="r_cont">
+								{{mainData.phone}}
+							</view>
 						</view>
 						<view class="info-container formLis"  style="height: 76rpx;padding-bottom: 10rpx;">
 							<view><text>姓名:</text>{{mainData.User&&mainData.User.login_name}}</view>
