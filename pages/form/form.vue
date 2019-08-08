@@ -1,11 +1,11 @@
 <template>
 	<view class="container">
-		<view class="name-container">
+		<view class="formLis name-container">
 			<view class="title">产品名称</view>
-			<input v-model="submitData.title" type="text" placeholder="请输入产品名称" placeholder-style="color:#999999;font-size:13px;" />
+			<input v-model="submitData.title" type="text" placeholder="请输入产品名称" placeholder-style="color:#999999;font-size:28rpx;" />
 		</view>
 
-		<view class="cate-container">
+		<view class="formLis cate-container">
 			<view class="title">交易类型</view>
 			<view class="lable-selt">
 				<radio-group class="radio-group"  @change="radioChange($event,'type')">
@@ -22,7 +22,7 @@
 			</view>
 		</view>
 
-		<view class="rolle-container">
+		<view class="formLis rolle-container">
 			<view class="title">选择我的角色</view>
 			<view class="lable-selt">
 				<radio-group class="radio-group" @change="radioChange($event,'role')">
@@ -36,13 +36,13 @@
 			</view>
 		</view>
 
-		<view class="tel-container">
-			<view class="title" style="width:33%;">交易对方手机号</view>
-			<input v-model="submitData.phone" type="number" style="width: 40%;" placeholder="请输入对方手机号" maxlength="11" placeholder-style="color:#999999;font-size:13px; width:100%;text-align: right; left:auto; right:0" />
+		<view class="formLis tel-container" style="padding-right: 120rpx;">
+			<view class="title">交易对方手机号码</view>
+				<input class="test" v-model="submitData.phone" type="number" placeholder="请输入对方手机号" maxlength="11" placeholder-style=" color:#999999;font-size:28rpx;" style="width:320rpx;text-align: right;"/>
 			<view class="button" v-if="!other.user_no" @click="searchOther"><button>提交</button></view>
 		</view>
 
-		<view class="phone-big-container" v-if="other.user_no">
+		<view class="formLis phone-big-container" v-if="other.user_no">
 
 			<!-- <view class="phone-container">
 				<view class="title">交易对方手机号</view>
@@ -56,45 +56,54 @@
 
 		</view>
 
-		<view class="sum-container">
+		<view class="formLis sum-container">
 			<view class="title">交易金额</view>
 			<input v-model="submitData.price" type="number" placeholder="请输入交易金额" placeholder-style="color:#999999;font-size:13px;" />
 		</view>
 
-		<view class="name-container">
+		<view class="formLis name-container">
 			<view class="title">交易内容</view>
 			<!-- <input v-model="submitData.content" type="text" placeholder="不刷量,不分销" placeholder-style="color:#000;font-size:13px;" /> -->
-			不刷量,不分销
+			<view class="jynr">不刷量，不分销</view>
 		</view>
 
-		<view class="tip-container">
-			<view class="title">增加内容</view>
+		<view class="formLis tip-container" style="height: 260rpx; justify-content: end; align-items: initial;padding-top: 20rpx;">
+			<view class="title" style="margin-right: 20rpx;">增加内容</view>
 			<textarea v-model="submitData.content" type="text" placeholder="请输入您要补充的信息" placeholder-style="color:#999999;font-size:13px;" />
 		</view>
 	   
 	   
-	<view class="img-container">
-	  <view class="title">附件</view>
-	  <!-- <input type="file"  id="custom-up" @change='upload' style='display: none !important;'> -->
-	  <view ref="input" class="input" style="display: none;">  
-
-        </view> 
-	  <image @click="webSelf.$Utils.stopMultiClick(upload)" src="../../static/images/form-icon3.png"/>
-	  <view class="text-container">
-		  <view><p>可上传图片或者文件</p></view>
-		  <view><p>上传点击无效请点击右上角复制链接，用其他手机浏览器打开</p></view>
-		  
-		  <view><p class="p2">(可上传多张)</p></view>
-	  </view>
+	<view class="formLis img-container" style="height: auto;border-bottom: none;justify-content: end; align-items: initial;padding-top: 20rpx;">
+		<view class="title" style="width:120rpx;margin-right: 20rpx;">附件</view>
+		<!-- <input type="file"  id="custom-up" @change='upload' style='display: none !important;'> -->
 	  
-	  <template v-for="item in submitData.mainImg" >
-	  	<image :key="item.id" v-if="item.type=='image'" :src="item.url"></image>
-	  	<view :key="item.id" v-else >{{item.name}}</view>
-	  </template>
-	  <view class="code-container" @click="show()">
-		  <view>客服二维码</view>
-		  <image src="../../static/images/form-img1.png"/>
-	  </view>
+		<view style="width:540rpx;">
+			<view ref="input" class="input" style="display: none;"></view> 
+			<view style="display:flex;align-items:center;justify-content: space-between;">
+				<view class="text-container">
+					<view>可上传图片或者文件</view>
+					<view>上传点击无效请点击右上角复制链接，用其他手机浏览器打开</view>
+					<view style="color: red;font-weight: bold;">(可上传多张)</view>
+				</view>
+				<!-- 客服二维码 -->
+				<view class="code-container" @click="show()">
+					<view>客服二维码</view>
+					<image src="../../static/images/form-img1.png"/>
+				</view>
+			</view>
+			<view>
+				<image class="uploadBtn" @click="webSelf.$Utils.stopMultiClick(upload)" src="../../static/images/form-icon3.png" style="width:60rpx;height:60rpx;"/>
+			</view>
+			
+			<!-- 上传显示的文件和图片 -->
+			<view class="addImgbox">
+				<template v-for="item in submitData.mainImg">
+					<image :key="item.id" v-if="item.type=='image'" :src="item.url"></image>
+					<view class="fileBox" :key="item.id" v-else >{{item.name}}</view>
+				</template>
+			</view>
+		</view>
+	  
 	</view>
 	
 	<view class="submit" @click="webSelf.$Utils.stopMultiClick(submit)"><button>提交</button></view>
@@ -163,7 +172,6 @@
 				}
 			}
 		},
-		
 	
 		onLoad(options) {
 			const self = this;
@@ -175,7 +183,6 @@
 			document.title = '提交表单'			
 		},
 		methods: {
-			
 				searchOther(){
 					const self = this;
 					if(!self.submitData.phone){
@@ -546,7 +553,7 @@
 <style>
 	@import "../../assets/style/form.css";
 	@import "../../assets/style/common.css";
-	.lable-selt{ position: absolute; right: 40rpx;}
+	.lable-selt{ position: absolute; right: 5%;}
 	.lable-selt .selt{ width:60rpx; height:60rpx; font-size: 24rpx;}
 	.lable-selt label{ font-size: 26rpx; padding-left: 20rpx;}
 	/* uni-radio .uni-radio-input{width:10rpx!important;height:10rpx!important;} */

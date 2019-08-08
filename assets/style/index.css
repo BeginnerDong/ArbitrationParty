@@ -8,24 +8,50 @@
  height:350rpx;
 }
 .nickname-container{
-	display:flex;
-	white-space:nowrap;
+	/* display:flex;
+	white-space:nowrap; */
 	width:80%;
 	margin:0rpx 10%;
-    padding:80rpx 0rpx 10rpx 0rpx;
+    padding:60rpx 0rpx 20rpx 60rpx;
 	border-bottom:1rpx solid #F1F1F1;
+	overflow: hidden;
+	position: relative;
 }
 .nickname-container image{
-	width:32rpx;
-	height:32rpx;
-	display:inline-block;
+	width:40rpx;
+	height:40rpx;
+	display:block;
 	vertical-align:middle;
-	padding-top:10rpx;
+	float: left;
+	position: absolute;
+	left: 0;
+	bottom: 30rpx;
 }
- input{
-	margin-left:50rpx;
+.nickname-container input{
+	width: 100%;
+	line-height: 60rpx;
+	height: 60rpx;
+	box-sizing:border-box;
+	float: left;
+	font-size: 28rpx;
 }
-button{
+
+.nickname-container .sendBtn{
+	line-height:60rpx;
+	color:#00A1E9;
+	border:none;
+	width:180rpx;
+	height:60rpx;
+	padding: 0;
+	font-size:24rpx;
+	background-color: #ffffff;
+	border-radius:0;
+	position: absolute;
+	bottom: 20rpx;
+	right: 0;
+	
+}
+/* button{
 	color:#00A1E9;
 	border:none;
 	width:190rpx;
@@ -33,7 +59,8 @@ button{
 	font-size:27rpx;
 	background-color: #ffffff;
 	border-radius:0;
-}
+} */
+
 .button{
 	text-align:center;
 }
@@ -42,10 +69,12 @@ width:80%;
 height:80rpx;
 line-height: 80rpx;
 background-color:#00A1E9;
-font-size:30rpx;
+font-size:32rpx;
 color:#ffffff;
-margin:280rpx 10% 20rpx 10%;
+margin:160rpx auto 20rpx auto;
 border-radius: 10rpx;
 }
 .white{color: #FFFFFF;}
 .center{text-align: center;}
+.switchBtn{font-size: 28rpx; padding: 0 40rpx; height: 60rpx; line-height: 60rpx; color: #00A1E9; clear: both;float: right;}
+input div{width: auto;}

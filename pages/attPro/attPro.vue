@@ -1,4 +1,5 @@
 <template>
+	
 	<view class="attPro-container">
 	   <view class="banner-container" :class="{fixTitle:whether}">
 			<view @click="num=0" :class="{'active-item':num===0}"  class="item"><view class="text">进行中</view></view>
@@ -56,7 +57,7 @@
 
 		onLoad(options) {
 			const self = this;
-			self.$Utils.loadAll(['getMainData'], self);
+
 		},
 		
 		onShow() {

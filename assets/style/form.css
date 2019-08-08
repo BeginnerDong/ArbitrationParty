@@ -1,56 +1,54 @@
 /**************产品名称****************/
+page{padding-bottom: 160rpx;}
+
 .container{
 	width:100%;
 	margin:0;
 	padding:0;
 	font-family:PingFang-SC-Medium;
 }
-.name-container{
-  display:flex;
-  white-space:nowrap;
-  width:100%;
-  height:55px;
-  padding:0 5%;
-  border-bottom:1px solid #F1F1F1;
-  align-items:center;
-}
-.name-container .title{
-	width:10%;
-	height:26px;
-	font-size:15px;
+.container .title{
+	height:100rpx;
+	font-size:30rpx;
 	color:rgb(34,34,34);
 	display:flex;
 	align-items:center;
 }
-.name-container input{
+.container .formLis{
+	padding: 0 4%;
+	font-size: 28rpx;
+	display:flex;
+	align-items:center;
+	justify-content: space-between;
+	width: 100%;
+	height: 110rpx;
+	box-sizing:border-box;
+	border-bottom:1px solid #F1F1F1;
+	position: relative;
+}
+.container .formLis input{
+	width: 460rpx;
+	height: 60rpx;
+	line-height: 60rpx;
+	font-size: 30rpx;
+	text-align: right;
+}
+.name-container{
+  border-bottom:2rpx solid #F1F1F1;
+  align-items:center;
+}
+.name-container .jynr{font-size: 28rpx;}
+
+/* .name-container input{
    width:78%;
    height:26px;
    text-align:right;
-}
+} */
 /**************产品名称****************/
 
-/**************交易类型****************/
-.cate-container{
-	width:100%;
-	height:55px;
-	display:flex;
-	white-space:nowrap;
-    padding:0 5%;
-	align-items:center;
-	border-bottom:1px solid #F1F1F1;
-}
-.cate-container .title{
-	width:10%;
-	height:26px;
-	font-size:15px;
-	color:rgb(34,34,34);
-	display:flex;
-	align-items:center;
-}
-/**************交易类型****************/
 
 /**************角色****************/
-.rolle-container{
+/*.rolle-container{
 	width:100%;
 	height:55px;
 	display:flex;
@@ -59,18 +57,18 @@
 	align-items:center;
 	border-bottom:1px solid #F1F1F1;
 }
-.rolle-container .title{
+ .rolle-container .title{
 	width:10%;
 	height:55px;
 	font-size:15px;
 	color:rgb(34,34,34);
 	display:flex;
 	align-items:center;
-}
+} */
 /**************角色****************/
 
 /****************手机号***************/
-.tel-container{
+/*.tel-container{
   	  width:100%;
   	  height:55px;
   	  display:flex;
@@ -90,32 +88,36 @@
 	 text-align: right;
 	 display:flex;
 	 align-items:center;
-  }
+  } 
  .tel-container input{
-	width:60%; 
+	width:60%;
 	height:55px;
 	text-align:right;
-	  }
-  .tel-container button{
-	 width:48px;
-	 height:26px;
-	 line-height: 26px;
-	 font-size:11px;
-	 margin-left:30%;
-	 text-align:center;
-	 align-items:center;
-	 background-color:rgb(3,150,255);
-	 color:#ffffff;
-  }
+}*/
+/* 手机号码提交按钮 */
+.tel-container button{
+	width:100rpx;
+	height:60rpx;
+	line-height: 60rpx;
+	font-size:24rpx;
+	text-align:center;
+	align-items:center;
+	background-color:rgb(3,150,255);
+	color:#ffffff;
+	padding: 0;
+	position: absolute;
+	right: 4%;
+	top: 50%;
+	transform: translateY(-50%);
+}
   
 /************isshow************/
-.phone-big-container{
-
+/* .phone-big-container{
   width:100%;
   height:80px;
   border-bottom:1px solid #F1F1F1;
-  }
-  .phone-container{
+  } */
+ /* .phone-container{
   	  width:100%;
   	  height:40px;
   	  display:flex;
@@ -125,15 +127,6 @@
 	  display:flex;
   	  align-items: center;
   	  color:rgb(34,34,34);
-  }
-  .phone-container .title{
-	 width:10%;
-	 height:40px;
-	 font-size:15px;
-	 color:rgb(34,34,34);
-	 text-align: right;
-	 display:flex;
-	 align-items:center;
   }
  .phone-container input{
 	width:60%; 
@@ -149,8 +142,8 @@
 	 align-items:center;
 	 background-color:rgb(3,150,255);
 	 color:#ffffff;
-  }
-  .info-container{
+  } */
+/*  .info-container{
 	  width:100%;
 	  height:40px;
 	  display:flex;
@@ -160,7 +153,7 @@
 	  display:flex;
 	  align-items: center;
 	  color:rgb(34,34,34);
-  }
+  } */
   .score{
 	  padding:0 10%;
   }
@@ -168,55 +161,56 @@
 /****************手机号***************/
 
 /****************交易金额***************/
-.sum-container{
+/*.sum-container{
  display:flex;
  white-space:nowrap;
  width:100%;
- height:55px;
+ height:110rpx;
  padding:0 5%;
  align-items:center;
- border-bottom:1px solid #F1F1F1;
+ border-bottom:2rpx solid #F1F1F1;
 }
-.sum-container .title{
+ .sum-container .title{
 	 width:10%;
-	 height:55px;
-	 font-size:15px;
+	 height:110rpx;
+	 font-size:30rpx;
 	 color:rgb(34,34,34);
 	 display:flex;
 	 align-items:center;
-  }
+} */
   .sum-container input{
      width:78%;
-     height:26px;
+     height:50rpx;
      text-align:right;
   }
 /****************交易金额***************/
 
 /************增加内容************/
-.tip-container{
+/*.tip-container{
 	display:flex;
 	white-space:nowrap;
 	width:100%;
-	height:115px;
+	height:230px;
 	padding:5%;
-	border-bottom:1px solid #F1F1F1;
+	border-bottom:2rpx solid #F1F1F1;
 }
-.tip-container .title{
+ .tip-container .title{
 	width:22%;
 	height:55px;
 	font-size:15px;
 	color:rgb(34,34,34);
-}
+} */
 .tip-container textarea{
-	width:60%;
+	width:500rpx;
 	height:90px;
-	padding:4%;
-	background-color:rgb(243,243,243);	
+	padding:20rpx;
+	background-color:#f5f5f5;	
+	flex-wrap: wrap;
 }
 /************增加内容************/
 
 /************上传图片************/
-.img-container{
+/* .img-container{
 	display:flex;
 	white-space:nowrap;
 	width:100%;
@@ -224,65 +218,91 @@
 	padding:5%;
 	border-bottom:1px solid #F1F1F1;
 	position:relative;
-	}
-	.img-container .title{
-		width:20%;
-		height:55px;
-		font-size:15px;
-		color:rgb(34,34,34);
-	}
-	.img-container input{
-		width:20%;
-		height:90px;
-		padding:4%;
-		background-color:rgb(243,243,243);
-	}
-	.img-container image{
-		width:8%;
-		height:32px;
-		position:absolute;
-		left:31%;
-		top:40%;
-	}
-	.text-container{
-		width:10%;
-		height:55px;
-		font-size:12px;
-		padding:5% 5% 10% 5%;
-		color:rgb(153,153,153);
-	}
-	.img-container p{
-		width:10%;
-		height:20px;
-		}	
-.code-container{
+}
+ .img-container .title{
 	width:20%;
-	height:20px;
+	height:55px;
 	font-size:15px;
+	color:rgb(34,34,34);
+} */
+.img-container input{
+	width:20%;
+	height:90px;
+	padding:4%;
+	background-color:rgb(243,243,243);
+}
+	
+
+.text-container{
+	width:360rpx;
+	height:auto;
+	 line-height: 36rpx;
+	font-size:20rpx;
+	padding-right:10rpx;
+	color:rgb(153,153,153);
+}
+.img-container p{
+	width:10%;
+	height:20px;
+}
+
+/* 客服微信二维码 */
+.code-container{
+	width:120rpx;
+	height:auto;
+	font-size:22rpx;
+	text-align: center;
 	color:rgb(102,102,102);
-	position:absolute;
-	top:65%;
-	left:65%;
-	display:flex;
-	text-align:center;
+	padding:20rpx;
+	border-radius: 8rpx;
+	box-shadow: 0 0 10rpx rgba(0,0,0,0.15);
 }
+/* 上传后的图片 */
 .code-container image{
-	width:85%;
-	height:68px;
-	margin:20% 28% 0 -28%;
+	width:120rpx;
+	height:120rpx; 
+	display: block;
+	margin:10rpx auto;
 }
+
+
+
 /************上传图片************/
-.submit{
-	width:100%;
-	margin:100px 0;
-	text-align:center;
+.uploadBtn{
+	padding: 60rpx;
+	background: #f5f5f5;
+	border:2rpx solid #eee;
 }
+.addImgbox{
+	padding-top:20rpx;
+	overflow: hidden;
+}
+.addImgbox image{
+	width:170rpx;
+	height:210rpx; 
+	display: block;
+	float: left;
+	margin:10rpx 10rpx 10rpx 0;
+}
+/* 上传后的文件 */
+.fileBox{
+	width: 100%;
+	font-size: 30rpx;
+	display: inline-block;
+	clear: both;
+	
+}
+
 .submit button{
 	width:80%;
-	height:40px;
+	margin:100rpx auto;
+	height:80rpx;
+	line-height: 80rpx;
 	color:#ffffff;
 	background-color:rgb(3,150,255);
-	font-size:15px;
+	font-size:32rpx;
+	text-align:center;
+	border-radius: 8rpx;
 }
 
 /*客服二维码弹窗*/
@@ -324,10 +344,12 @@
 	left:23%;
 }
 #modal #close{
-	width:7%;
-	height:6%;
-	left:-10%;
-	top:20%;
+	width:60rpx;
+	height:60rpx;
+	position: absolute;
+	bottom:40rpx;
+	left:50%;
+	transform: translateX(-50%);
 }
 /*客服二维码弹窗*/
 

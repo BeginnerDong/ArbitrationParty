@@ -1,7 +1,7 @@
 <template>
 <view class="container">
 	<view class="nickname-container">
-		<!-- <image :src="wx_info.hedaImgUrl?wx_info.hedaImgUrl:'../../static/images/about-img.png'"/> -->
+		<image class="photo" :src="wx_info.hedaImgUrl?wx_info.hedaImgUrl:'../../static/images/about-img.png'"/>
 		<view class="nickname-img">
 			<view class="nickname">{{login_name}}</view>
 			<view class="score">
@@ -36,21 +36,21 @@
 			<!--一个item-->
 			  <view class="item"  @click="webSelf.$Router.navigateTo({route:{path:'/pages/myTrading/myTrading'}})">
 			 	 <view><image src="../../static/images/about-icon5.png"/></view>
-			 	 <view class="text"><text>交易流水</text></view>
+			 	 <view class="text">交易流水</view>
 			 </view>
 			<!--一个item-->
 			
 			<!--一个item-->
 			  <view class="item"  @click="webSelf.$Router.navigateTo({route:{path:'/pages/myCtfcation/myCtfcation'}})">
 			 	 <view><image src="../../static/images/about-icon6.png"/></view>
-			 	 <view class="text"><text>实名认证</text></view>
+			 	 <view class="text">实名认证</view>
 			 </view>
 			<!--一个item-->
 			
 			<!--一个item-->
 			  <view class="item" @click="webSelf.$Router.navigateTo({route:{path:'/pages/myCredit/myCredit'}})">
 			 	 <view><image src="../../static/images/about-icon7.png"/></view>
-			 	 <view class="text"><text>信誉分</text></view>
+			 	 <view class="text">信誉分</view>
 			 </view>
 			<!--一个item-->
 		</view>

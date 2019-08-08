@@ -1,26 +1,29 @@
+
 <template>
 	<!--pages/login/login.wxml-->
 	<view class="container">
 		<image src="../../static/images/login-icon1.png" />
 		<view class="register-container">
 			<view class="nickname-container">
-				<image src="../../static/images/login-icon2.png" />
-				<input style="width:100%;" type="text" v-model="submitData.name" placeholder="请输入姓名" placeholder-style="color:#999999;font-size:13px;" />
+				<image class="icon" src="../../static/images/login-icon2.png" />
+				<input type="text" v-model="submitData.name" placeholder="请输入姓名" placeholder-style="color:#999999;font-size:28rpx;" />
 			</view>
 
 			<view class="nickname-container">
-				<image src="../../static/images/login-icon3.png" style="width:26rpx;height:40rpx;" />
-				<input style="width:100%;" type="text" v-model="submitData.phone" placeholder="请输入手机号" placeholder-style="color:#999999;font-size:13px;" />
+				<image class="icon" src="../../static/images/login-icon3.png"  />
+				<input type="text" v-model="submitData.phone" placeholder="请输入手机号" placeholder-style="color:#999999;font-size:28rpx;" />
 			</view>
 
 			<view class="nickname-container">
 				<image src="../../static/images/login-icon4.png" />
-				<input style="width:100%;" type="text" v-model="submitData.code" placeholder="请输入验证码" placeholder-style="color:#999999;font-size:13px;" />
-				<button style="line-height:50rpx;" @click="!sendCode?webSelf.$Utils.stopMultiClick(getCode):''">{{sendCode?codeTimer+'s':'获取验证码'}}</button>
+				<input type="text" v-model="submitData.code" placeholder="请输入验证码" placeholder-style="color:#999999;font-size:28rpx;" />
+				<button class="sendBtn"  @click="!sendCode?webSelf.$Utils.stopMultiClick(getCode):''">{{sendCode?codeTimer+'s':'获取验证码'}}</button>
 			</view>
 
 			<view class="button" @click="webSelf.$Utils.stopMultiClick(login)"><button>{{subType}}</button></view>
-			<view  @click="change">{{subType=='登陆'?'注册':'登陆'}}</view>
+			<view style="width:80%;margin:40rpx auto 30rpx auto;">
+				<view class="switchBtn center"  @click="change">{{subType=='登陆'?'注册':'登陆'}}</view>
+			</view>
 		</view>
 	</view>
 </template>

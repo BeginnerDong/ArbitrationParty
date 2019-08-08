@@ -11,48 +11,52 @@
 		<view class="tab-con">
 			<view v-if="num===0">
 				<view class="container">
-					<view class="name-container">
+					<view class="name-container formLis">
 						<view class="title">产品名称</view>
 						<input v-model="mainData.title" type="text" disabled="true"  placeholder-style="color:rgb(34,34,34);font-size:13px;" />
 					</view>
 
-					<view class="cate-container">
+					<view class="cate-container formLis">
 						<view class="title">交易类型</view>
 						{{mainData.type==1?'cpa':(mainData.type==2?'cps':'uv')}}
 					</view>
 
-					<view class="rolle-container">
+					<view class="rolle-container formLis">
 						<view class="title">选择我的角色</view>
 						{{mainData.Role&&mainData.Role.role==1?'甲方':'乙方'}}
 					</view>
 
 					<view class="phone-big-container">
-						<view class="phone-container">
+						<view class="phone-container formLis" style="border-bottom:none; height: 76rpx;padding-top: 10rpx;">
 							<view class="title">交易对方手机号</view>
 							{{mainData.phone}}
 						</view>
-						<view class="info-container">
+						<view class="info-container formLis"  style="height: 76rpx;padding-bottom: 10rpx;">
 							<view><text>姓名:</text>{{mainData.User&&mainData.User.login_name}}</view>
 							<view class="score"><text>信用分:</text>{{mainData.UserInfo&&mainData.UserInfo.score}}</view>
 							<view><text>已完结交易单数:</text>{{mainData.pCount&&mainData.pCount.total_count}}</view>
 						</view>
 					</view>
 
-					<view class="sum-container">
+					<view class="sum-container formLis">
 						<view class="title">交易金额</view>
-						{{mainData.price}}
+						<view class="r_cont">
+							{{mainData.price}}
+						</view>
 					</view>
 
-					<view class="name-container">
+					<view class="name-container formLis">
 						<view class="title">交易内容</view>
-						不刷量,不分销
+						<view class="r_cont">
+							不刷量,不分销
+						</view>
 					</view>
 
-					<view class="tip-container">
-						<view class="title">增加内容</view>
-						{{mainData.content}}
+					<view class="tip-container formLis" style="height: auto; justify-content: end; align-items: initial;padding-top: 20rpx;padding-bottom: 20rpx;">
+						<view class="title"  style="margin-right: 40rpx;">增加内容</view>
+						<view class="r_cont" style="width:480rpx;height:auto;padding:20rpx;background-color:#f5f5f5;flex-wrap: wrap;text-align: right;">{{mainData.content}}</view>
 					</view>
-	   	<view class="img-container">
+	   	<view class="img-container formLis" style="height: auto;padding-top: 20rpx;padding-bottom: 20rpx;">
 					<view class="title">附件</view>
 					<view class="img-little-container">
 						<template v-for="item in mainData.mainImg" >
@@ -96,10 +100,14 @@
 					 <view class="date">{{item.create_time}}</view>
 				 </view>
 				 <view class="content">{{item.content}}</view>
-				 <template v-for="c_item in item.mainImg" >
-				 	<image :key="c_item.id" v-if="c_item.type=='image'" :src="c_item.url"></image>
-				 	<view :key="c_item.id" v-else >{{c_item.name}}</view>
-				 </template>
+				 
+				<view class="addImgbox">
+					<template  v-for="c_item in item.mainImg">
+						<image :key="c_item.id" v-if="c_item.type=='image'" :src="c_item.url"></image>
+						<view class="fileBox" :key="c_item.id" v-else >{{c_item.name}}</view>
+					</template>
+				</view>
+				 
 			</view>
 			<view class="button" @click="webSelf.$Router.navigateTo({route:{path:'/pages/addDynamic/addDynamic?project_no='+project_no+'&role'+mainData.Role.role}})"><button>添加动态</button></view>
 		 </view>

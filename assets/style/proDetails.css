@@ -1,45 +1,36 @@
  *{margin: 0; padding: 0;}
 .attPro-container{
 	width:100%;
-
-	background-color:rgb(245,245,245);
+	/* background-color:rgb(245,245,245); */
 }
 .banner-container{
 	width:100%;
-	height:50px;
+	height:100rpx;
 	display:flex;
 	white-space:nowrap;
 	background-color:#ffffff;
-}
-.banner-container .active-item{
-	width:50%;
-	height:50px;
-    display:inline-block;
-	font-size:15px;
-	color:#00A1E9;
-	text-align:center;
+	box-shadow: 0 0 20rpx rgba(0,0,0,0.1);
+	margin-bottom: 10rpx;
+	
 }
 .banner-container .item{
 	width:50%;
-	height:50px;
-    display:inline-block;
-	font-size:15px;
 	text-align:center;
-	padding:10px 0;
 }
 .active-item .text{
 	width:40%;
-	height:32px;
+	font-size:30rpx;
+	line-height: 94rpx;
+	color: #00A1E9 ;
 	border-bottom:2px solid #00A1E9;
-	margin:0px 0 0 50px;
-	padding:5px 0 0 0;
 }
 .item .text{
 	width:40%;
-	height:32px;
-	margin:0px 0 0 50px;
-	padding:5px 0 0 0;
+	font-size:30rpx;
+	line-height: 96rpx;
+	margin: 0 auto;
 }
+
 /**************产品名称****************/
 .container{
 	width:100%;
@@ -57,23 +48,36 @@
   border-bottom:1px solid #F1F1F1;
   align-items:center;
 }
-.name-container .title{
-	width:10%;
-	height:26px;
-	font-size:13px;
-	color:#999999;
+.container .title{
+	height:100rpx;
+	font-size:30rpx;
+	color:#666;
 	display:flex;
 	align-items:center;
 }
-.name-container input{
-   width:78%;
-   height:26px;
-   text-align:right;
+.container .formLis{
+	padding: 0 4%;
+	display:flex;
+	align-items:center;
+	justify-content: space-between;
+	width: 100%;
+	height: 110rpx;
+	box-sizing:border-box;
+	border-bottom:1px solid #F1F1F1;
+	position: relative;
 }
+.container .formLis input{
+	width: 460rpx;
+	height: 60rpx;
+	line-height: 60rpx;
+	font-size: 30rpx;
+	text-align: right;
+}
+.container .r_cont{ font-size: 30rpx;}
 /**************产品名称****************/
 
 /**************交易类型****************/
-.cate-container{
+/* .cate-container{
 	width:100%;
 	height:55px;
 	display:flex;
@@ -94,11 +98,11 @@
    width:78%;
    height:26px;
    text-align:right;
-}
+} */
 /**************交易类型****************/
 
 /**************角色****************/
-.rolle-container{
+/* .rolle-container{
 	width:100%;
 	height:55px;
 	display:flex;
@@ -119,13 +123,13 @@
    width:78%;
    height:26px;
    text-align:right;
-}
+} */
 /**************角色****************/
 
 /****************手机号***************/
   
 /************isshow************/
-.phone-big-container{
+/* .phone-big-container{
   width:100%;
   height:80px;
   border-bottom:1px solid #F1F1F1;
@@ -140,7 +144,7 @@
 	  display:flex;
   	  align-items: center;
   	  color:rgb(34,34,34);
-  }
+  } 
   .phone-container .title{
 	 width:10%;
 	 height:40px;
@@ -155,6 +159,7 @@
 	height:40px;
 	text-align:right;
 	  }
+*/
   .phone-container button{
 	 width:48px;
 	 height:26px;
@@ -211,7 +216,7 @@
 /****************交易金额***************/
 
 /************增加内容************/
-.tip-container{
+/* .tip-container{
 	display:flex;
 	white-space:nowrap;
 	width:100%;
@@ -224,7 +229,7 @@
 	height:55px;
 	font-size:13px;
 	color:#999999;
-}
+} */
 .tip-container textarea{
 	width:60%;
 	height:90px;
@@ -252,9 +257,9 @@
 	   width:80%;
      }
 	.img-container image{
-		width:35%;
-		height:110px;
-		padding:3% 2%;
+		width:170rpx;
+		height:210rpx;
+		padding:10rpx 1%;
 		float:left;
 	}
 	.text-container{
@@ -304,9 +309,10 @@
 	height:75px;
 }
 .button-container{
-	width:100%;
+	width:90%;
 	height:50px;
-	padding:30px 5% 0px 5%;
+	margin: 0 auto;
+	padding-top:30px;
 	display:flex;
 	white-space:nowrap;
 }
@@ -331,22 +337,43 @@ button{
 	text-align:right;
 }
 .platform{
-width:30%;
 height:40px;
-white-space:nowrap;
 color:rgb(102,102,102);
 font-size:14px;
-padding:0 7.5%;
-display:flex;
-align-items:center;
+margin-top: 20rpx;
+padding:30rpx 0 40rpx 0;
+text-align: center;
+border-top:2rpx solid #f5f5f5 ;
 }
 .platform image{
-	width:12%;
-	height:15px;
+	width:36rpx;
+	height:30rpx;
 	display:inline-block;
-	display:flex;
-	align-items:center;
+	vertical-align: middle;
 }
+
+/* 平台信息标题 */
+.pTtitle{
+	color:#000000;
+	font-size:32rpx;
+	line-height: 64rpx;
+	font-weight:bold;
+	width: 94%; 
+	margin: 0 auto;
+	padding-top: 40rpx;
+	position: relative;
+	margin-bottom: 10rpx;
+}
+.pTtitle::after{
+	content: "";
+	width: 126rpx;
+	height: 8rpx;
+	background: #00A1E9;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
 /**********底部按钮**********/
 
 
@@ -409,14 +436,14 @@ align-items:center;
 }
 .dynamic-container{
   width:80%;
-  margin:20px auto;
-  padding:5%;
-  box-shadow:0px 0px 5px #e8e8e8;
+  margin:40rpx auto;
+  padding:30rpx;
+  box-shadow:0px 0px 10rpx #e8e8e8;
   border-radius: 10rpx;
 }
 .date-container{
 	width:30%;
-	height:15px;
+	height:30rpx;
 	display:flex;
 	white-space:nowrap;
 }
@@ -424,20 +451,20 @@ align-items:center;
 	font-family:MicrosoftYaHai;
 	display:inline-block;
 	color:rgb(255,157,3);
-	font-size:15px;
+	font-size:30rpx;
 }
 .dynamic-container .jia.jiab{
 	color:rgb(38,199,72);
 }
 .dynamic-container .date{
 	color:#999999;
-	font-size:15px;
+	font-size:30rpx;
 	padding:0 10%;
 }
 .dynamic-container .content{
 	font-size:15px;
 	color:#999999;
-	margin:15px 0;
+	margin:30rpx 0;
 }
 .dynamic-container image{
 	width:30%;
@@ -445,11 +472,34 @@ align-items:center;
 }
 .dynamic-big-container .button{
 	width:100%;
-	height:30px;
+	height:60rpx;
 }
 .dynamic-big-container button{
 	width:80%;
-	height:35px;
-	margin:10px auto;
+	height:80rpx;
+	line-height: 80rpx;
+	font-size:32rpx;
+	margin:20rpx auto;
 }
 /************项目动态*********/
+
+.addImgbox{
+	overflow: hidden;
+}
+.addImgbox image{
+	width:170rpx;
+	height:210rpx; 
+	display: block;
+	float: left;
+	margin:10rpx 10rpx 10rpx 0;
+}
+
+.fileBox{
+	width: 100%;
+	font-size: 30rpx;
+	display: inline-block;
+	clear: both;
+	
+}
+
+

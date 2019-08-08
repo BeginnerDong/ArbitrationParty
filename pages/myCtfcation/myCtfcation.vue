@@ -120,8 +120,8 @@
 
 <style>
 	.myCtfcation{padding:0 3%;}
-	.item-lis{padding:40rpx 0; line-height: 60rpx; position: relative; padding-left: 180rpx;border-bottom: 2rpx solid #e1e1e1;}
-	.item-lis .tit{font-size: 28rpx; width: 180rpx; float:left; position: absolute;left: 0; top:40rpx;}
-	.item-lis .write{ width: 100%; height: 60rpx;background: #f6f6f6;padding: 0 20rpx; box-sizing: border-box; font-size: 26rpx;}
+	.item-lis{padding:30rpx 0; line-height: 60rpx; position: relative; padding-left: 180rpx;border-bottom: 2rpx solid #e1e1e1;}
+	.item-lis .tit{font-size: 30rpx; width: 180rpx; float:left; position: absolute;left: 0; top:50%; transform: translateY(-50%);}
+	.item-lis .write{ width: 100%; height: 60rpx;background: #f6f6f6;padding: 0 20rpx; box-sizing: border-box; font-size: 30rpx;}
 	.okBtn{  width: 80%; height: 80rpx;color: #ffffff; background-color: rgb(3,150,255); font-size: 30rpx; line-height: 80rpx; margin:280rpx auto 100rpx auto;}
 </style>
