@@ -34,16 +34,19 @@
 		</view>
 		<view class="tip-container">
 			<view class="title">验收附件：</view>
-			<view><p>上传点击无效请点击右上角复制链接，用其他手机浏览器打开</p></view>
-			<view class="right-uppic">
-				<image @click="upload" class="icon" src="../../static/images/form-icon3.png"/>
+			<view class="">
+				<view class="right-uppic">
+					<image @click="upload" class="icon" src="../../static/images/form-icon3.png"/>
+				</view>
+				<view><p>上传点击无效请点击右上角复制链接，用其他手机浏览器打开</p></view>
+				<view >
+					<template v-for="item in submitData.mainImg" >
+						<image :key="item.id" v-if="item.type=='image'" :src="item.url"></image>
+						<view :key="item.id" v-else >{{item.name}}</view>
+					</template>
+				</view>
 			</view>
-			<view >
-				<template v-for="item in submitData.mainImg" >
-					<image :key="item.id" v-if="item.type=='image'" :src="item.url"></image>
-					<view :key="item.id" v-else >{{item.name}}</view>
-				</template>
-			</view>
+			
 		</view>
 
 		<view class="submit" @click="webSelf.$Utils.stopMultiClick(submit)"><button>确认</button></view>

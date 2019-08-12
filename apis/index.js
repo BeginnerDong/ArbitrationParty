@@ -57,6 +57,19 @@ export default {
 		};
 		http.HTTP(allParams);
 	},
+	
+	projectUpdate(param, callback) {
+		var allParams = {
+			url: 'Common/Project/update',
+			type: 'post',
+			noToken: true,
+			data: param,
+			sCallback: function(data) {
+				callback && callback(data);
+			}
+		};
+		http.HTTP(allParams);
+	},
 	processGet(param, callback) {
 		var allParams = {
 			url: 'Common/Process/get',

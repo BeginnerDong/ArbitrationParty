@@ -118,6 +118,13 @@
 				"navigationBarTitleText": "信誉分", //设置页面标题文字
 				"onReachBottomDistance": 100
 			}
+		},
+		{
+			"path": "pages/article/article",
+			"style": {
+				"navigationBarTitleText": "详情", //设置页面标题文字
+				"onReachBottomDistance": 100
+			}
 		}
 
     ]

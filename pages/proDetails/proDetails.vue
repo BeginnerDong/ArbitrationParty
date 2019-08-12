@@ -59,7 +59,7 @@
 					<view class="tip-container formLis" style="height: auto; justify-content: end; align-items: initial;padding-top: 20rpx;padding-bottom: 20rpx; ">
 						<view class="title" style="margin-right: 40rpx;">增加内容</view>
 						<view class="r_cont" style="width:480rpx;height:auto;padding:20rpx;background-color:#f5f5f5;flex-wrap: wrap;text-align: right;">
-							{{mainData.content}}
+							<input v-model="mainData.content" :disabled="mainData.comfirm==0&&mainData.user_no!=myUserNo?false:true" type="text" value="" />
 						</view>
 					</view>
 	   	<view class="img-container formLis" style="height: auto;padding-top: 20rpx;padding-bottom: 20rpx;">
@@ -88,13 +88,16 @@
 				</view>
 	   	
 				<view class="button-big-container">
-					<view class="button-container">
-						<view>{{mainData.step}}</view>
+					<view class="button-container" v-if="mainData.comfirm==1">
+						
 						<view v-if="mainData.step!=2&&mainData.arbitration_step==0" class="button" @click="webSelf.$Router.navigateTo({route:{path:'/pages/applyArbitral/applyArbitral?project_no='+project_no+'&role'+mainData.Role.role}})"><button>申请仲裁</button></view>
 						<view v-if="mainData.step!=2&&mainData.Role&&mainData.Role.role==1" class="button" @click="webSelf.$Router.navigateTo({route:{path:'/pages/voucher/voucher?project_no='+project_no+'&role'+mainData.Role.role}})"><button>上传付款凭证</button></view>
 						<view v-if="mainData.step!=2&&mainData.Role&&mainData.Role.role==2" class="button" @click="webSelf.$Router.navigateTo({route:{path:'/pages/applyPay/applyPay?project_no='+project_no+'&role'+mainData.Role.role}})"><button>申请付款</button></view>
 					</view>
-					<view class="platform" @click="show()">
+					<view class="button-container" v-if="mainData.comfirm==0&&mainData.user_no!=myUserNo">
+						<view  class="button" @click="confirm"><button>确认</button></view>
+					</view>
+					<view class="platform" @click="webSelf.$Router.navigateTo({route:{path:'/pages/article/article?title=平台说明'}})">
 					  <image src="../../static/images/apply-icon5.png"/>《平台说明》
 					  <!-- <text></text> -->
 				   </view>
@@ -103,12 +106,12 @@
 	   </view>
 	  
 	   <!-- 弹窗 -->
-	   <view id="modal-bg" v-if="isShow"></view>
-	   <view id="modal" v-if="isShow">
-	   	<view class="title">平台说明</view>
-	   	<image src="../../static/images/form-img1.png" class="code"/>
+	  <!-- <view id="modal-bg" v-if="isShow"></view> -->
+	 <!--  <view id="modal" > -->
+	   <!-- 	<view class="title" >平台说明</view> -->
+	   <!-- 	<image src="../../static/images/form-img1.png" class="code"/>
 	   	<image src="../../static/images/about-icon8.png" id="close" @click="show()"/>
-	   </view>
+	   </view> -->
 	   <!-- 弹窗 -->
 	   
 	</view>
@@ -153,20 +156,24 @@
 				},
 				messageData:[],
 				paginate:{},
+				myUserNo:''
 			}
 		},
 
 		onLoad(options) {
 			const self = this;
 			self.project_no = options.project_no;
+			self.myUserNo = uni.getStorageSync('user_info').user_no;
 			self.thirdInfo.name = uni.getStorageSync('user_info').thirdApp.name;
 			self.thirdInfo.account = uni.getStorageSync('user_info').thirdApp.account;
-			self.paginate = self.$Utils.cloneForm(self.$AssetsConfig.paginate);
+			
 			
 		},
 		
 		onShow() {
 			const self = this;
+			self.paginate = self.$Utils.cloneForm(self.$AssetsConfig.paginate);
+			self.messageData = [];
 			self.$Utils.loadAll(['getMainData','getProcessData'], self);
 		},
 		
@@ -181,6 +188,48 @@
 
 
 		methods: {
+			
+			test(){
+				
+			},
+			
+			
+			confirm(){
+			
+				const self = this;
+				const postData = {
+					tokenFuncName:'getProjectToken',
+					searchItem:{
+						project_no:self.project_no,
+						user_no:self.mainData.user_no,
+					},
+					data:{
+						comfirm:1,
+						content:self.mainData.content
+					}
+				};
+				const callback = (res)=>{
+					if(res.solely_code==100000){
+						uni.showToast({
+							title: '确认成功',
+							duration: 1000,
+							success:function(){
+								
+							}
+						});
+						self.getMainData();
+					}else{
+						uni.showToast({
+							title: '确认失败',
+							duration: 1000,
+							success:function(){
+								
+							}
+						});
+					};
+				};
+				self.$apis.projectUpdate(postData, callback);
+			},
 			
 			downLoad(url){
 				window.open(url)
@@ -288,18 +337,18 @@
 				const postData = {
 					searchItem:{
 						project_no:self.project_no,
-						type:1
+						type:1,
+						user_type:0
 					},
 					paginate:self.$Utils.cloneForm(self.paginate),
 					getAfter:{
 						Role: {
 							tableName: 'Relation',
-							middleKey: 'status',
-							key: 'status',
+							middleKey: 'user_no',
+							key: 'relation_two',
 							condition: '=',
 							info:['role'],
 							searchItem: {
-								relation_two:uni.getStorageSync('user_info').user_no,
 								relation_one:self.project_no
 							}
 						}

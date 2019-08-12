@@ -2,8 +2,8 @@
 	
 	<view class="attPro-container">
 	   <view class="banner-container" :class="{fixTitle:whether}">
-			<view @click="num=0" :class="{'active-item':num===0}" class="item"><view class="text">进行中</view></view>
-			<view @click="num=1" :class="{'active-item':num===1}" class="item"><view class="text">已完结</view></view>
+			<view @click="menuChange(0)" :class="{'active-item':num===0}" class="item"><view class="text">进行中</view></view>
+			<view @click="menuChange(1)" :class="{'active-item':num===1}" class="item"><view class="text">已完结</view></view>
 		</view>
 		<view class="tab-con">
 			<view class="tip-big-container" >
@@ -27,13 +27,15 @@
 						<view class="name">{{item.Role.role==1?'甲方':'乙方'}}</view>
 					</view>
 					<view>
-						<image class="fxdIcon" src="../../static/images/canyu-icon2.png" mode=""></image>
+						<image class="fxdIcon" :src="item.Role.role==1?'../../static/images/canyu-icon2.png':'../../static/images/canyu-icon1.png'" mode=""></image>
 					</view>
-					<view class="finishBtn" v-if="searchItem.step==1&&item.Role.role==1">
+					
+					<view class="finishBtn" v-if="searchItem.step==1&&item.Role.role==1&&item.comfirm==1">
 						<button type="button">完结</button>
 					</view>
 				</view>  
 			</view>
+			<view style="width:100%;height:50px;"></view>
 		</view>
 	</view>
 
@@ -91,6 +93,12 @@
 			menuChange(num) {
 				const self = this;
 				self.num = num;
+				if(self.num==0){
+					self.searchItem.step = 1;
+				}else{
+					self.searchItem.step = 2;
+				};
+				self.getMainData(true);
 			},
 									
 			getMainData(isNew) {
@@ -98,20 +106,34 @@
 				if(isNew){
 					self.paginate = self.$Utils.cloneForm(self.$AssetsConfig.paginate);
 					self.mainData = [];
+					self.isLoadAll = false;
 				};
 				const postData = {
 					tokenFuncName:'getProjectToken',
 					searchItem:self.$Utils.cloneForm(self.searchItem),
 					paginate: self.$Utils.cloneForm(self.paginate)
 				};
+				
+				postData.getBefore = {
+					spu: {
+						tableName: 'Relation',
+						middleKey: 'project_no',
+						key: 'relation_one',
+						searchItem: {
+							relation_two:['in',[uni.getStorageSync('user_info').user_no]]
+						},
+						condition: 'in'
+					}
+				};
 				postData.getAfter = {
 					Role: {
 						tableName: 'Relation',
-						middleKey: 'user_no',
-						key: 'relation_two',
+						middleKey: 'project_no',
+						key: 'relation_one',
 						condition: '=',
 						info:['role'],
 						searchItem: {
+							relation_two:['in',[uni.getStorageSync('user_info').user_no]],
 							status: 1,
 						}
 					}

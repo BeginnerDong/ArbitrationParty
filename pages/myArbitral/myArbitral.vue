@@ -90,13 +90,12 @@
 					getAfter:{
 						Role: {
 							tableName: 'Relation',
-							middleKey: 'status',
-							key: 'status',
+							middleKey: 'project_no',
+							key: 'relation_one',
 							condition: '=',
 							info:['role'],
 							searchItem: {
 								relation_two:uni.getStorageSync('user_info').user_no,
-								relation_one:self.project_no
 							}
 						}
 					}

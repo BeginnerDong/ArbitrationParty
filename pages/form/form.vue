@@ -193,6 +193,17 @@
 						});
 						return;
 					};
+					if(self.submitData.phone==uni.getStorageSync('user_info').info.phone){
+						uni.showToast({
+							title: '不能填写自己手机号',
+							duration: 1000,
+							complete:function(){
+								
+							}
+						});
+						self.submitData.phone = '';
+						return;
+					};
 					const postData = {
 						tokenFuncName:'getProjectToken',
 						searchItem:{
