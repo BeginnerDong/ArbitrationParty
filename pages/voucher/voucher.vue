@@ -77,7 +77,7 @@
 							title: '提交成功',
 							duration: 1000,
 							complete:function(){
-								uni.setStorageSync('canClick', true);
+								
 								setTimeout(function(){
 									uni.navigateBack({
 										delta: 1

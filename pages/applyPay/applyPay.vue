@@ -2,7 +2,7 @@
 	<view class="container">
 		<view class="name-container">
 			<view class="title">申请金额：</view>
-			<input @input="changePrice" v-model="submitData.price" type="text" placeholder="请输入申请金额" placeholder-style="color:#999999;font-size:12px;" />
+			<input @input="changePrice" v-model="submitData.price" type="number" placeholder="请输入申请金额" placeholder-style="color:#999999;font-size:12px;" />
 		</view>
 		
 		<view class="name-container">
@@ -88,6 +88,7 @@
 			const self = this;
 			document.title = '申请付款'			
 		},
+		
 		methods: {
 			
 			changePrice(){
@@ -111,7 +112,6 @@
 							title: '提交成功',
 							duration: 1000,
 							complete:function(){
-								uni.setStorageSync('canClick', true);
 								setTimeout(function(){
 									uni.navigateBack({
 										delta: 1
