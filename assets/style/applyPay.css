@@ -138,4 +138,24 @@
 	font-size:32rpx;
 }
 
+.addImgbox{
+	padding-top:20rpx;
+	overflow: hidden;
+}
+.addImgbox image{
+	width:170rpx;
+	height:210rpx; 
+	display: block;
+	float: left;
+	margin:10rpx 10rpx 10rpx 0;
+}
+/* 上传后的文件 */
+.fileBox{
+	width: 100%;
+	font-size: 30rpx;
+	display: block;
+	clear: both;
+	
+}
+
 

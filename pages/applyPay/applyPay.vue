@@ -33,16 +33,17 @@
 			<textarea v-model="submitData.content" type="text" placeholder="请输入您的申请理由" placeholder-style="color:#999999;font-size:28rpx;" />
 		</view>
 		<view class="tip-container">
+			
 			<view class="title">验收附件：</view>
 			<view style="width:76%">
 				<view class="right-uppic">
 					<image @click="upload" class="icon" src="../../static/images/form-icon3.png"/>
 				</view>
 				<view class="notes"><p>上传点击无效请点击右上角复制链接，用其他手机浏览器打开</p></view>
-				<view >
+				<view class="addImgbox">
 					<template v-for="item in submitData.mainImg" >
 						<image :key="item.id" v-if="item.type=='image'" :src="item.url"></image>
-						<view :key="item.id" v-else >{{item.name}}</view>
+						<view class="fileBox" :key="item.id" v-else >{{item.name}}</view>
 					</template>
 				</view>
 			</view>
