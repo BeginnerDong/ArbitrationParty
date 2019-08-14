@@ -1,9 +1,9 @@
 <template>
 	<view class="attPro-container">
-		<view class="banner-container">
+		<view class="attPro-tit">
 			{{mainData.title}}
 		</view>
-		<view  class="content ql-editor" style="width: 100%;">
+		<view  class="content" style="width: 100%;overflow: hidden;">
 			<view v-html="mainData.content">
 			</view>
 		</view>
@@ -93,6 +93,19 @@
 </script>
 
 <style>
+	
+	/* .attPro-container .ql-editor{
+		width: 100%;
+	}
+	.attPro-container .ql-editor uni-view{
+		width: 100%;
+	}
+	.attPro-container .ql-editor uni-view>p{
+		width: 100%;
+	}
+	.attPro-container img{
+		width: 100%;
+	}*/
 	@import "../../assets/style/proDetails.css";
 	@import "../../assets/style/quill.css";
 </style>

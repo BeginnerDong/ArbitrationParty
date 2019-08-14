@@ -30,15 +30,15 @@
 		
 		<view class="tip-container">
 			<view class="title">申请理由:</view>
-			<textarea v-model="submitData.content" type="text" placeholder="请输入您的申请理由" placeholder-style="color:#999999;font-size:11px;" />
+			<textarea v-model="submitData.content" type="text" placeholder="请输入您的申请理由" placeholder-style="color:#999999;font-size:28rpx;" />
 		</view>
 		<view class="tip-container">
 			<view class="title">验收附件：</view>
-			<view class="">
+			<view style="width:76%">
 				<view class="right-uppic">
 					<image @click="upload" class="icon" src="../../static/images/form-icon3.png"/>
 				</view>
-				<view><p>上传点击无效请点击右上角复制链接，用其他手机浏览器打开</p></view>
+				<view class="notes"><p>上传点击无效请点击右上角复制链接，用其他手机浏览器打开</p></view>
 				<view >
 					<template v-for="item in submitData.mainImg" >
 						<image :key="item.id" v-if="item.type=='image'" :src="item.url"></image>
@@ -149,7 +149,7 @@
 
 <style>
 	@import "../../assets/style/applyPay.css";
-	.right-uppic{width: 20%; height: 90px; padding: 4%; background-color: rgb(243,243,243); position: relative;}  
+	.right-uppic{width:120rpx; height:120rpx; padding: 40rpx; background-color: rgb(243,243,243); position: relative;}  
 	.right-uppic input{ width: 100%; height: 100%; opacity: 0.5;}
 	.right-uppic .icon{width:64rpx;height: 64rpx;position: absolute;left: 50%;top: 50%;transform: translate(-50%,-50%);}
 	

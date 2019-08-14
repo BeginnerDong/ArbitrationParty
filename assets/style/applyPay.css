@@ -1,33 +1,31 @@
  *{margin: 0; padding: 0;}
 .container{
-	width:100%;
-	position: absolute;
+	padding:0 3%;
+	/* position: absolute;
 	left: 0;
 	top: 0;
 	overflow:hidden;
-	overflow-y:auto;
+	overflow-y:auto; */
 }
 .name-container{
   display:flex;
   white-space:nowrap;
   width:100%;
-  height:55px;
-  padding:0 5%;
+  height:110rpx;
   border-bottom:1px solid #F1F1F1;
   align-items:center;
 }
 .name-container .title{
-	width:10%;
-	height:26px;
-	font-size:13px;
+	width:20%;
+	height:32rpx;
+	font-size:26rpx;
 	color:rgb(34,34,34);
 	display:flex;
 	align-items:center;
 }
 .name-container input{
    width:78%;
-   height:26px;
-   padding-left:10%;
+   height:32rpx;
 }
 .name-container .style-container{
    width:78%;
@@ -39,18 +37,18 @@
 }
 .style-little-container{
 	width:25%;
-	height:26px;
+	height:32rpx;
 	display:flex;
 	align-items:center;
 }
 .style-container image{
-	width:10px;
-	height:11px;
-	margin-right:5px;
+	width:22rpx;
+	height:22rpx;
+	margin-right:10rpx;
 	display:inline-block;
 }
 .style-container text{
-	font-size:13px;
+	font-size:26rpx;
 	color:rgb(34,34,34);
 }
 /************增加内容************/
@@ -58,20 +56,23 @@
 	display:flex;
 	white-space:nowrap;
 	width:100%;
-	height:115px;
-	padding:5%;
-	border-bottom:1px solid #F1F1F1;
+	/* height:115px; */
+	box-sizing: border-box;
+	padding:30rpx 0;
+	border-bottom:2rpx solid #F1F1F1;
 }
 .tip-container .title{
 	width:22%;
-	height:55px;
-	font-size:13px;
+	height:110rpx;
+	font-size:26rpx;
 	color:rgb(34,34,34);
 }
 .tip-container textarea{
-	width:60%;
-	height:90px;
-	padding:4%;
+	width:76%;
+	height:200rpx;
+	font-size:28rpx;
+	padding:20rpx;
+	box-sizing: border-box;
 	background-color:rgb(243,243,243);	
 }
 /************增加内容************/
@@ -81,7 +82,7 @@
 	display:flex;
 	white-space:nowrap;
 	width:100%;
-	height:120px;
+	height:240rpx;
 	padding:5%;
 	border-bottom:1px solid #F1F1F1;
 	position:relative;
@@ -94,13 +95,13 @@
 	}
 	.img-container input{
 		width:20%;
-		height:90px;
+		height:180rpx;
 		padding:4%;
 		background-color:rgb(243,243,243);
 	}
 	.img-container image{
 		width:8%;
-		height:32px;
+		height:64rpx;
 		position:absolute;
 		left:31%;
 		top:40%;
@@ -112,23 +113,29 @@
 		padding:5% 5% 10% 5%;
 		color:rgb(153,153,153);
 	}
-	.img-container p{
-		width:10%;
-		height:20px;
-		}	
+.img-container p{
+	width:10%;
+	height:20px;
+}	
+.notes{ 
+	white-space: normal;
+	font-size: 28rpx;
+	color: #999;
+	padding-top:20rpx;
+}
 /************上传图片************/
 .submit{
 	width:100%;
-	margin:100px 0 50px 0 ;
+	margin:100rpx 0 ;
 	text-align:center;
 }
 .submit button{
 	width:70%;
-	height:35px;
+	height:80rpx;
 	margin:0 auto;
 	color:#ffffff;
 	background-color:rgb(3,150,255);
-	font-size:12px;
+	font-size:32rpx;
 }
 
 

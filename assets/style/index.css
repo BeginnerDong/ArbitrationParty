@@ -1,3 +1,5 @@
+
+/* uni-page-head{ display: none!important;} */
 .container{
  width:100%;
  padding:0rpx;
@@ -36,6 +38,8 @@
 	font-size: 28rpx;
 }
 
+
+
 .nickname-container .sendBtn{
 	line-height:60rpx;
 	color:#00A1E9;
@@ -49,6 +53,7 @@
 	position: absolute;
 	bottom: 20rpx;
 	right: 0;
+	z-index: 66;
 	
 }
 /* button{
