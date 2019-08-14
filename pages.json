@@ -19,7 +19,8 @@
 			"path": "pages/myCenter/myCenter",
 			"style": {
 				"navigationBarTitleText": "个人中心", //设置页面标题文字
-				"onReachBottomDistance": 100
+				"onReachBottomDistance": 100,
+				"navigationStyle": "custom"
 			}
 		},
 		{

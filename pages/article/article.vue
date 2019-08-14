@@ -3,7 +3,7 @@
 		<view class="attPro-tit">
 			{{mainData.title}}
 		</view>
-		<view  class="content" style="width: 100%;overflow: hidden;">
+		<view  class="content ql-editor" style="width: 100%;">
 			<view v-html="mainData.content">
 			</view>
 		</view>
@@ -93,11 +93,19 @@
 </script>
 
 <style>
-	
-	/* .attPro-container .ql-editor{
-		width: 100%;
+	.attPro-tit{
+		height: 100rpx;
+		line-height: 100rpx;
+		padding-top: 20rpx;
+		text-align: center;
 	}
-	.attPro-container .ql-editor uni-view{
+	 .attPro-container .ql-editor{
+		 padding: 20rpx;
+		font-size: 28rpx;
+		line-height: 44rpx;
+	}
+	/*
+	* .attPro-container .ql-editor uni-view{
 		width: 100%;
 	}
 	.attPro-container .ql-editor uni-view>p{
